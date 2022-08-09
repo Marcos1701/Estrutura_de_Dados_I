@@ -1,4 +1,4 @@
 ## Esse repositório contém:
 
-- [x] códigos mal feinhos, mas feitos de coração..
+- [x] códigos feinhos, mas feitos de coração..
 - [ ] códigos belícimos
