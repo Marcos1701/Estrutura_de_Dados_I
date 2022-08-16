@@ -13,13 +13,14 @@ entrada e das duas prestações, conforme as regras acima.*/
 
 main()
 {
-    int valor_prestacoes, valor_produto;
+    int valor_entrada, valor_prestacoes, valor_produto;
 
     printf("Digite o valor do produto: \n=> R$ ");
     scanf("%d", &valor_produto);
 
-    valor_prestacoes = valor_produto / 3;
+    valor_entrada = (valor_produto / 3) + (valor_produto % 3);
+    valor_prestacoes = (valor_produto - valor_entrada) / 2;
 
-    printf("O valor da entrada e igual a R$ %d", valor_prestacoes);
+    printf("O valor da entrada e igual a R$ %d", valor_entrada);
     printf("\nValor das parcelas: R$ %d", valor_prestacoes);
 }
