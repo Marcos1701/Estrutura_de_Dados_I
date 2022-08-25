@@ -75,8 +75,7 @@ int main(void){
 }
 ```
 
-R-  Inicialmente o programa cria as variáveis x e y e exibe o valor de x, logo em seguida o valor de x é         
-  sobrescrito/atualizado pelo valor de y e por isso, ao exibi-lo novamente, o seu valor está diferente.
+R-  Inicialmente o programa cria as variáveis x e y e exibe o valor de x, logo em seguida o valor de x é sobrescrito/atualizado pelo valor de y e por isso, ao exibi-lo novamente, o seu valor está diferente.
 
 **1.5) Explique o que acontece quando o programa a seguir é executado          .**
 
@@ -99,9 +98,7 @@ int main(void){
 
 ```
 
-R- Inicialmente o programa cria as variáveis a = 3 e b = 5 e em seguida cria dois ponteiros, p e q, que "apontam" ou           
- são iterligados aos endereços de memoria de a e b, respectivamente, e consequentimente as alterações feitas em          
- p e q são diretamente relacionadas as variáveis a e b, alterando os seus valores.
+R- Inicialmente o programa cria as variáveis a = 3 e b = 5 e em seguida cria dois ponteiros, p e q, que "apontam" ou são iterligados aos endereços de memoria de a e b, respectivamente, e consequentimente as alterações feitas em p e q são diretamente relacionadas as variáveis a e b, alterando os seus valores.
 
 **1.6) Indique a forma de alocação de memória(estática sequencial, estática encadeada, dinâmica sequencial ou dinâmica encadeada) 
 usada para armazenar os itens 1, 2, 3 e 4, em cada um dos programas a seguir.**
