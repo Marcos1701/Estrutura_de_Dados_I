@@ -53,7 +53,7 @@ int main(void){
 
 ```
 
-R- Isso ocorre por causa do if, em c, comparar os endereços de memoria dos vetores (ou valores do tipo char) e não o seu conteúdo em si.
+R- Isso ocorre por causa do if, que em c, comparar os endereços de memoria dos vetores (ou valores do tipo char) e não o seu conteúdo em si.
 
 **1.4) Explique o que acontece quando o programa a seguir é executado    .**
 
