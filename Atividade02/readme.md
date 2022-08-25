@@ -104,6 +104,7 @@ R- Inicialmente o programa cria as variáveis a = 3 e b = 5 e em seguida cria do
 usada para armazenar os itens 1, 2, 3 e 4, em cada um dos programas a seguir.**
 
 (a)
+
 ```
 #include<stdio.h>
 #include<stdlib.h>
@@ -120,6 +121,7 @@ int main(void){
 R- Dinâmica sequencial.
 
 (b)
+
 ```
 
 #include<stdio.h>
@@ -145,6 +147,7 @@ return0;
 R- Estática encadeada.
 
 (c)
+
 ``` 
 
 #include<stdio.h>
