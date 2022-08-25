@@ -135,12 +135,12 @@ typedef struct no{
 }No;
 
 int main(void){
-    Nov[4] = {{3, v + 2}, {1, v + 3}, {4, NULL}, {2, V + 0}};
+    No v[4] = {{3, v + 2}, {1, v + 3}, {4, NULL}, {2, v + 0}};
     
      for (No *p = v + 1; p != NULL; p = p->prox)
        printf("%d\n",p->item);
        
-return0;
+return 0;
 }
 ```
 
@@ -174,7 +174,7 @@ int main(void){
 
   while(p){
    printf("%d\n", p->item);
-   P = p->prox;
+   p = p->prox;
   }
 return 0;
 }
