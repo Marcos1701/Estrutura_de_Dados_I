@@ -17,8 +17,10 @@ int main (void) {
 }
 ```
 
-R-                                                               
-R-
+R- A saída resultante será primeiramente "2", depois exibirá "1" e                                                                                               
+R- em seguida exibirá "pilha vazia", isso acontece, pois todos os valores                                             
+R- inseridos na pilha já haviam sido desempilhados, dessa forma deixando-a                                        
+R- vazia                                                                  .
 
 **2.2 Qual a saída exibida pelo programa a seguir ? Por quê ?**
 
@@ -36,15 +38,52 @@ return 0;
 }
 ```
 
-R-                                                             
-R-
+
+R- a saída será:
+  ```
+ //0
+ //2
+ //4
+ //8
+```                                                             
+R- Esse programa inicialmente cria uma pilha e em seguida empilha o valor 8, na mesma,                                                             
+R- logo depois, enquanto o topo da pilha for maior que zero, ele empilha o valor do topo                    
+R- dividido por dois, depois, enquanto a pilha não for vazia, ele desempilha os valores                      
+R- adicionados                                                                          .
 
 **2.3 Usando pilha , crie um programa para inverter a ordem das letras nas palavras de uma frase
 digitada pelo usuário. Por exemplo, se for digitada a frase "apenas um teste", o programa deverá
 exibir a frase " sanepa mu etset ".**
 
-R-                                                                                       
-R-
+R- 
+  ```
+#include <iostream>
+#include "pilha.h"
+
+main()
+{
+
+Pilha p = pilha();
+int x;
+
+string frase;
+
+cout << "Digite a frase a seguir:\n=>";
+cin >> frase;
+
+for(int x = 0; x < frase.length; x++){
+  empilha(frase[x], p);
+}
+
+x = p->topo;
+while(x >= 0){
+  cout << p->item[x];
+  x--;
+}
+}
+
+```
+
 
 **2.4 Crie um programa que usa duas pilhas A e B para ordenar uma sequência de n números reais dados
 pelo usuário . A ideia é organizar a pilha A de modo que nenhum item seja empilhado sobre outro menor 
