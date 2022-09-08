@@ -1,5 +1,5 @@
 #include <iostream>
-#include "pilha_char.h"
+#include "pilha.h"
 using namespace std;
 
 void exibir_opcoes()
@@ -8,14 +8,15 @@ void exibir_opcoes()
     cout << "1 - Empilhar" << endl
          << "2 - Desempilhar" << endl;
     cout << "3 - Imprimir" << endl
+         << "4 - Destruir_P" << endl
          << "0 - Sair" << endl
          << endl;
 }
 
 main()
 {
-    int op;
     Pilha *p = pilha();
+    int op;
 
     void exibir_opicoes();
     exibir_opcoes();
@@ -24,10 +25,10 @@ main()
 
     while (op != 0)
     {
-        char z[10];
+        char *z;
         if (op == 1)
         {
-            cout << "Digite uma palavra a seguir\n=> ";
+            cout << "Digite um valor a seguir\n=> ";
             cin >> z;
             empilha(z, p);
         }
@@ -37,7 +38,7 @@ main()
         }
         else if (op == 3)
         {
-            imprimir(p);
+            imprimir(p->topo);
         }
         else
         {
