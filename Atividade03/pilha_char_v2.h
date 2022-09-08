@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct No
 {
@@ -20,11 +21,11 @@ Pilha *pilha()
     return p;
 }
 
-void empilha(char valor, Pilha *p)
+void empilha(char *valor, Pilha *p)
 {
 
     No *no = (No *)malloc(sizeof(No));
-    no->valor[0] = valor;
+     strcpy(no->valor, valor);
 
     if (p->topo == NULL)
     {
@@ -44,7 +45,9 @@ void empilha(char valor, Pilha *p)
 void desempilha(Pilha *p)
 {
     No *n = p->topo;
-    char valor = n->valor[0];
+
+    char valor[50];
+    strcpy(valor, n->valor);
 
     if (p->topo == NULL)
     {
