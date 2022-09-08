@@ -1,22 +1,21 @@
 #include <iostream>
-#include "pilha.h"
+#include "pilha_char.h"
 using namespace std;
 
 void exibir_opcoes()
 {
-    cout << "Selecione uma opcao: " << endl;
+    cout << "\nSelecione uma opcao: " << endl;
     cout << "1 - Empilhar" << endl
          << "2 - Desempilhar" << endl;
     cout << "3 - Imprimir" << endl
-         << "4 - Destruir_P" << endl
-         << "0 - Sair" << endl
+         << "0 - Sair e destruir a pilha\n"
          << endl;
 }
 
 main()
 {
-    Pilha *p = pilha();
     int op;
+    Pilha *p = pilha();
 
     void exibir_opicoes();
     exibir_opcoes();
@@ -25,10 +24,10 @@ main()
 
     while (op != 0)
     {
-        char *z;
+        char z[50];
         if (op == 1)
         {
-            cout << "Digite um valor a seguir\n=> ";
+            cout << "Digite uma palavra a seguir\n=> ";
             cin >> z;
             empilha(z, p);
         }
@@ -50,5 +49,6 @@ main()
         cout << "=> ";
         cin >> op;
     }
-    cout << "Certo, entao tchau tchau..";
+    destroi(p);
+    cout << "Certo, entao ate mais..";
 }
