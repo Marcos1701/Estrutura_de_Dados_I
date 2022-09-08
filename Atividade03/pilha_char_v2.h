@@ -10,7 +10,7 @@ typedef struct No
 
 typedef struct pilha
 {
-    int tamanho = 0;
+    int tamanho;
     No *topo;
 } Pilha;
 
@@ -18,6 +18,7 @@ Pilha *pilha()
 {
     Pilha *p = (Pilha *)malloc(sizeof(Pilha));
     p->topo = NULL;
+    p->tamanho = 0;
     return p;
 }
 
@@ -25,7 +26,7 @@ void empilha(char *valor, Pilha *p)
 {
 
     No *no = (No *)malloc(sizeof(No));
-     strcpy(no->valor, valor);
+    strcpy(no->valor, valor);
 
     if (p->topo == NULL)
     {
@@ -75,11 +76,24 @@ void imprimir(No *no)
             n = n->prox;
         }
     }
+    else
+    {
+        printf("\nA pilha esta vazia\n\n");
+    }
 }
 
 void destroi(Pilha *p)
 {
-    free((p)->topo);
+    // free((p)->topo);
     free(p);
     p = NULL;
+
+    if (p == NULL)
+    {
+        printf("\nA pilha foi destruida com sucesso..\n\n");
+    }
+    else
+    {
+        printf("\nErro, pilha nao foi destruida!!\n\n");
+    }
 }
