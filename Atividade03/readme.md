@@ -58,28 +58,27 @@ exibir a frase " sanepa mu etset ".**
 R- 
   ```
 #include <iostream>
-#include "pilha.h"
+#include <string.h>
+#include "pilha_char.h"
+using namespace std;
 
 main()
 {
 
-Pilha p = pilha();
-int x;
+    Pilha *p = pilha();
 
-string frase;
+    char frase[50];
 
-cout << "Digite a frase a seguir:\n=>";
-cin >> frase;
+    cout << "Digite a frase a seguir:\n=>";
+    cin >> frase;
 
-for(int x = 0; x < frase.length; x++){
-  empilha(frase[x], p);
-}
+    for (int x = 0; frase[x] != '\0'; x++)
+    {
+        char z[1] = {frase[x]};
+        empilhar(z, p); // sem o retorno do valor empilhado...
+    }
 
-x = p->topo;
-while(x >= 0){
-  cout << p->item[x];
-  x--;
-}
+    imprimir_sem_quebra_de_linha(p->topo);
 }
 
 ```
