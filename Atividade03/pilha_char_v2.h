@@ -22,7 +22,7 @@ Pilha *pilha()
     return p;
 }
 
-void empilha(char *valor, Pilha *p)
+void empilhar(char *valor, Pilha *p)
 {
 
     No *no = (No *)malloc(sizeof(No));
@@ -64,7 +64,19 @@ void desempilha(Pilha *p)
     }
 }
 
-void imprimir(No *no)
+void imprimir_sem_quebra_de_linha(No *no)
+{
+    No *n = no;
+
+    if (no->valor != NULL)
+    {
+        printf("%c", n->valor[0]);
+        imprimir_sem_quebra_de_linha(n->prox);
+    }
+    free(n);
+}
+
+void imprimir_com_quebra_de_linha(No *no)
 {
     No *n = no;
 
