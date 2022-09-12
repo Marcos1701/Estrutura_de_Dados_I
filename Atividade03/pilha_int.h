@@ -60,15 +60,30 @@ void desempilha(Pilha *p)
     }
 }
 
-void imprimir(No *no)
+void imprimir_com_quebra_de_linha(Pilha *p)
+{
+    No *n = p->topo;
+
+    if (p->topo->valor != NULL)
+    {
+        while (n->valor != NULL)
+        {
+            printf("=> %d\n", n->valor);
+            n = n->prox;
+        }
+    }
+}
+
+void imprimir_sem_quebra_de_linha(No *no)
 {
     No *n = no;
 
     if (no->valor != NULL)
     {
+        printf("=> ");
         while (n->valor != NULL)
         {
-            printf("=> %d\n", n->valor);
+            printf("%d", n->valor);
             n = n->prox;
         }
     }
