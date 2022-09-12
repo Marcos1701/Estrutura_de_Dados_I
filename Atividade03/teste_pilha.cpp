@@ -37,7 +37,7 @@ main()
         }
         else if (op == 3)
         {
-            imprimir(p->topo);
+            imprimir_com_quebra_de_linha(p);
         }
         else
         {
