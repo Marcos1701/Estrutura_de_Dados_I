@@ -118,8 +118,8 @@ R-
 R-
 
 **2.7 Usando a função '_strdup (s)', declarada em 'string.h', corrija o programa do exercício anterior.
-Essa função cofia a cadeia 's' para uma área da memória, alocada dinamicamente pela função 'malloc()',
-e devolve o endereço dessa área. Depois de usada, essa cópia pode ser destruída com a função 'free()'.**
+Essa função cofia a cadeia 's' para uma área da memória, alocada dinamicamente pela função 'malloc( )',
+e devolve o endereço dessa área. Depois de usada, essa cópia pode ser destruída com a função 'free( )'.**
 
 R-                                                                                              
 R-
