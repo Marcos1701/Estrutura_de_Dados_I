@@ -75,7 +75,7 @@ main()
     for (int x = 0; frase[x] != '\0'; x++)
     {
         char z[1] = {frase[x]};
-        empilhar(z, p); // sem o retorno do valor empilhado...
+        empilhar(z, p); // desativando o retorno do valor empilhado para melhor observação...
     }
 
     imprimir_sem_quebra_de_linha(p->topo);
