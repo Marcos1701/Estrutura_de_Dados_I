@@ -10,8 +10,7 @@ int main(void)
    {
       printf("? ");
       gets(s);
-      x = strdup(s);
-      empilhar(x, P);
+      empilhar(strdub(s), P);
    }
    while (!vaziap(P))
       puts(desempilha_com_retorno(P));
