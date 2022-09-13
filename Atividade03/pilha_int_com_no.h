@@ -72,6 +72,10 @@ void imprimir_com_quebra_de_linha(Pilha *p)
             n = n->prox;
         }
     }
+    else
+    {
+        printf("A pilha esta vazia\n");
+    }
 }
 
 void imprimir_sem_quebra_de_linha(No *no)
@@ -86,6 +90,10 @@ void imprimir_sem_quebra_de_linha(No *no)
             printf("%d", n->valor);
             n = n->prox;
         }
+    }
+    else
+    {
+        printf("A pilha esta vazia\n");
     }
 }
 
