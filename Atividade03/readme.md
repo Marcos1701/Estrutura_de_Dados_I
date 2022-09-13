@@ -89,7 +89,62 @@ pelo usuário . A ideia é organizar a pilha A de modo que nenhum item seja empi
 (use a pilha B apenas como espaço de manobra), depois, descarregue e exiba os itens da pilha A.**
 
 R-                                                                                   
-R-
+ ```
+  #include <iostream>
+#include "pilha_int_vetor.h"
+#include <stdbool.h>
+using namespace std;
+
+/* utilizei uma versão de pilha/vetor por ser um pouco menos complicado
+nesse caso...*/
+
+void organizar_pilha(Pilha *A) //algoritmo bolha...
+{
+    int aux;
+    bool valor_cont;
+
+    for (int i = 0; i < A->topo; i++)
+    {
+        valor_cont = false;
+
+        if (A->item[i] < A->item[i + 1])
+        {
+            aux = A->item[i];
+            A->item[i] = A->item[i + 1];
+            A->item[i + 1] = aux;
+        }
+
+        if (!valor_cont)
+        {
+            break;
+        }
+    }
+
+    imprimir_com_quebra_de_linha(A);
+}
+
+main()
+{
+    // Pilha *B = pilha();// não utilizei por não haver necessidade...
+
+    int x;
+
+    cout << "Digite a qtd de valores que seram inseridos em A: ";
+    cin >> x;
+    Pilha *A = pilha(x);
+
+    while (x != 0)
+    {
+        int z;
+        cout << "Digite um valor a seguir\n=> ";
+        cin >> z;
+        empilha(z, A);
+        x--;
+    }
+
+    organizar_pilha(A);
+}
+```
 
 **2.5 Usando pilha, crie uma função para verificar se uma expressão composta apenas por chaves,
 colchetes e parênteses, representada por uma cadeia, está ou não balanceada . Por exemplo, as
