@@ -189,7 +189,7 @@ int main(void)
    {
       printf("? ");
       gets(s);
-      empilhar(strdub(s), P);
+      empilhar(strdup(s), P);
    }
    while (!vaziap(P))
       puts(desempilha_com_retorno(P));
