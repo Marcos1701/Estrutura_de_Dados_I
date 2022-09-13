@@ -3,61 +3,59 @@
 #include "pilha_int_vetor.h"
 using namespace std;
 
-int complemento_valor(int valor)
+bool conferir_caractere(int x,int y)
 {
-    switch (valor)
+    switch (x)
     {
     case ')':
-        return '(';
+      
+        if(y == '(')
+          return true;
+        else
+          return false;
         break;
     case ']':
-        return '[';
+        if(y == '[')
+          return true;
+        else
+          return false;
         break;
     case '}':
-        return '{';
-        break;
-    case '(':
-        return ')';
-        break;
-    case '[':
-        return ']';
-        break;
-    case '{':
-        return '}';
+        if(y == '{')
+          return true;
+        else
+          return false;
         break;
     case '.':
-        return 0;
+        return true;
     default:
         printf("Algum valor invalido foi inserido");
     }
 }
 
-bool conferir_expressao(Pilha *p)
+bool conferir_expressao(string x)
 {
 
-    int x, y, z;
+    int y, z, k;
     bool valor_cont = false;
+    Pilha *aux = pilha(x.length());
 
-    for (int k = p->topo; k >= 0; k--)
+    for ((k = x.length() - 1); k >= 0; k--)
     {
-        y = p->topo;
 
-        if (p->topo % 2 != 0)
+        if (x.length() % 2 != 0)
         {
             return false;
         }
 
-        y = p->item[k];
-        for (x = k; x >= 0; x++)
-        {
-            z = complemento_valor(y);
-            if (p->item[x] == z || y == '.')
-            {
-                p->item[x] = '.';
-                valor_cont = true;
-                break;
-            }
+        if(x[k] == ')' || x[k] == ']' || x[k] == '}'){
+             empilha(x[k], aux);
+        }else{
+            z = desempilha_com_retorno(aux);
+            valor_cont = conferir_caractere(x[k], z);
         }
+
+       
         if (!valor_cont)
             return false;
         abort();
@@ -75,13 +73,9 @@ main()
     string expressao;
     cout << "Digite a expressao a seguir (*sem espacos):\n=> ";
     cin >> expressao;
-    x = expressao.length();
-    Pilha *p = pilha(x);
+    //x = expressao.length();
 
-    for (int i = 0; i < x; i++)
-        empilha(expressao[i], p);
-
-    if (conferir_expressao(p))
+    if (conferir_expressao(expressao))
         cout << "Expressao balanceada";
     else
         cout << "Expressao nao balanceada";
