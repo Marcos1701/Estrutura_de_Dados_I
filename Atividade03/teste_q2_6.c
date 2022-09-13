@@ -5,7 +5,6 @@ int main(void)
 {
    Pilha *P = pilha();
    char s[11];
-   char *x;
    for (int i = 1; i <= 3; i++)
    {
       printf("? ");
