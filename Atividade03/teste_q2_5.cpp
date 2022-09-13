@@ -7,40 +7,37 @@ bool conferir_caractere(int x,int y)
 {
     switch (x)
     {
-    case ')':
+    case '(':
       
-        if(y == '(')
+        if(y == ')')
           return true;
         else
           return false;
         break;
-    case ']':
-        if(y == '[')
+    case '[':
+        if(y == ']')
           return true;
         else
           return false;
         break;
-    case '}':
-        if(y == '{')
+    case '{':
+        if(y == '}')
           return true;
         else
           return false;
         break;
-    case '.':
-        return true;
-    default:
-        printf("Algum valor invalido foi inserido");
     }
 }
 
 bool conferir_expressao(string x)
 {
 
-    int y, z, k;
+    int y, z;
+    int k = x.length();
     bool valor_cont = false;
     Pilha *aux = pilha(x.length());
 
-    for ((k = x.length() - 1); k >= 0; k--)
+    while(k >= 0)
     {
 
         if (x.length() % 2 != 0)
@@ -48,9 +45,9 @@ bool conferir_expressao(string x)
             return false;
         }
 
-        if(x[k] == ')' || x[k] == ']' || x[k] == '}'){
+        if(x[k] == '(' || x[k] == '[' || x[k] == '{'){
              empilha(x[k], aux);
-        }else{
+        }else if(x[k] == ')' || x[k] == ']' || x[k] == '}'){
             z = desempilha_com_retorno(aux);
             valor_cont = conferir_caractere(x[k], z);
         }
@@ -58,7 +55,8 @@ bool conferir_expressao(string x)
        
         if (!valor_cont)
             return false;
-        abort();
+       break;
+       k--;
     }
     return true;
 }
@@ -76,7 +74,7 @@ main()
     //x = expressao.length();
 
     if (conferir_expressao(expressao))
-        cout << "Expressao balanceada";
+        cout << "Expressao balanceada\n";
     else
-        cout << "Expressao nao balanceada";
+        cout << "Expressao nao balanceada\n";
 }
