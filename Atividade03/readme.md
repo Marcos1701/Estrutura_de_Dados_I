@@ -178,21 +178,25 @@ e devolve o endereço dessa área. Depois de usada, essa cópia pode ser destru�
 
 R-                                                                                              
  ```
-  #include <stdio.h>
+#include <stdio.h>
+#include <string.h>
 #include "pilha_char.h" // pilha de char *
 
-int main(void)
+using namespace std;
+
+main()
 {
-   Pilha *P = pilha();
-   char s[11];
-   for (int i = 1; i <= 3; i++)
-   {
-      printf("? ");
-      gets(s);
-      empilhar(strdup(s), P);
-   }
-   while (!vaziap(P))
-      puts(desempilha_com_retorno(P));
-   return 0;
+    Pilha *P = pilha();
+    char s[5];
+    for (int i = 1; i <= 3; i++)
+    {
+        printf("? ");
+        gets(s);
+        empilhar(strdup(s), P);
+    }
+    while (!vaziap(P))
+    {
+        desempilha_e_imprime_sem_quebra_de_linha(P);
+    }
 }
   ```
