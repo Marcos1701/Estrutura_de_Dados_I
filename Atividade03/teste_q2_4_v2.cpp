@@ -1,5 +1,5 @@
 #include <iostream>
-#include "pilha_int.h"
+#include "pilha_int_com_no.h"
 using namespace std;
 
 void organizar_pilha(Pilha *A, Pilha *B)
