@@ -253,8 +253,13 @@ int main(void){
    return 0;
 }
 ```
-R-                                                                                   
-R-
+R- Isso ocorre por conta do for que a cada 'passada' sobrescreve 's' com o valor 
+R- obtido com a função 'gets' e dessa forma resultando na saída a seguir :                                                                                 
+  ```
+  // tres
+  //tres
+  //tres
+  ```
 
 **2.7 Usando a função '_strdup (s)', declarada em 'string.h', corrija o programa do exercício anterior.
 Essa função cofia a cadeia 's' para uma área da memória, alocada dinamicamente pela função 'malloc( )',
