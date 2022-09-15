@@ -6,38 +6,59 @@ using namespace std;
 void organizar_pilha(Pilha *C, Pilha *D)
 {
     // bool valor_cont;
-    int k = C->topo->, aux;
+    int k = C->topo, aux;
     cout << "k: " << k << endl;
 
-    for (int i = 0; i < k; i++)
+    for (int i = k; i > 0; i--)
     {
-        // valor_cont = false;
-
-        for (int j = i + 1; j <= k; j++)
+        // aux = C->item[i];
+        // cout << "aux: " << aux << endl;
+        for (int j = i - 1; j >= 0; j--)
         {
-
-            if (C->item[i] < C->item[j])
+            aux = desempilha_com_retorno(C);
+            if (aux < C->item[C->topo])
             {
-                // aux = A->item[i];
-                empilha(C->item[i], D);
-                empilha(C->item[j], D);
-                desempilha(C);
-                desempilha(C);
+                empilha(aux, D);
+                empilha(desempilha_com_retorno(C), D);
                 empilha(desempilha_com_retorno(D), C);
                 empilha(desempilha_com_retorno(D), C);
-                // aux = desempilha_com_retorno(C);
-                // C->item[i - 1] = C->item[i];
-                // C->item[i] = desempilha_com_retorno(D);
-                cout << "conferindo: " << C->item[j] << endl;
-                // valor_cont = true;
             }
+            else
+            {
+                empilha(desempilha_com_retorno(C), D);
+            }
+            // aux = C->item[j];
         }
-
-        // if (!valor_cont)
-        //{
-        //     break;
-        // }
     }
+    // {
+    //     // valor_cont = false;
+
+    //     for (int j = i + 1; j <= k; j++)
+    //     {
+
+    //         if (C->item[i] < C->item[j])
+    //         {
+    //             // aux = A->item[i];
+    //             empilha(desempilha_com_retorno(C), D);
+    //             empilha(desempilha_com_retorno(C), D);
+    //             // empilha(C->item[j], D);
+    //             empilha(desempilha_com_retorno(D), C);
+    //             empilha(desempilha_com_retorno(D), C);
+    //             // aux = desempilha_com_retorno(C);
+    //             // C->item[i - 1] = C->item[i];
+    //             // C->item[i] = desempilha_com_retorno(D);
+    //             cout << "conferindo: " << C->item[j] << endl;
+    //             cout << "conferindo: " << C->item[i] << endl;
+    //             // valor_cont = true;
+    //         }
+    //     }
+
+    // if (!valor_cont)
+    //{
+    //     break;
+    // }
+    // k--;
+    //}
 
     imprimir_com_quebra_de_linha(C);
 }
