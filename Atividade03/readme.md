@@ -90,61 +90,76 @@ pelo usuário . A ideia é organizar a pilha A de modo que nenhum item seja empi
 
 R-                                                                                   
  ```
-  #include <iostream>
+ #include <iostream>
 #include "pilha_int_vetor.h"
 #include <stdbool.h>
 using namespace std;
 
-/* utilizei uma versão de pilha/vetor por ser um pouco menos complicado
-nesse caso...*/
-
-void organizar_pilha(Pilha *A) //algoritmo bolha...
+void organizar_pilha(int valor, Pilha *C, Pilha *D)
 {
-    int aux;
-    bool valor_cont;
-
-    for (int i = 0; i < A->topo; i++)
+    int k = C->tamanho - 1, aux, x = 0;
+    cout << "k: " << k << endl;
+    if (k == -1)
     {
-        valor_cont = false;
-
-        if (A->item[i] < A->item[i + 1])
-        {
-            aux = A->item[i];
-            A->item[i] = A->item[i + 1];
-            A->item[i + 1] = aux;
-        }
-
-        if (!valor_cont)
-        {
-            break;
-        }
+        empilha(valor, C);
+        return;
     }
 
-    imprimir_com_quebra_de_linha(A);
+    for (int i = k; i >= 0; i--)
+    {
+        aux = desempilha_com_retorno(C);
+        while (aux < valor)
+        {
+            empilha(aux, D);
+            if (C->topo != -1)
+                aux = desempilha_com_retorno(C);
+            else
+                break;
+            x = 1;
+        }
+
+        if (x)
+        {
+            empilha(valor, C);
+            while (D->topo > -1)
+            {
+                empilha(desempilha_com_retorno(D), C);
+            }
+        }
+        else
+        {
+            empilha(aux, C);
+            empilha(valor, C);
+
+            return;
+        }
+    }
+    return;
 }
 
 main()
 {
-    // Pilha *B = pilha();// não utilizei por não haver necessidade...
 
     int x;
 
     cout << "Digite a qtd de valores que seram inseridos em A: ";
     cin >> x;
+    cout << "tamanho : " << x << endl;
     Pilha *A = pilha(x);
+    Pilha *B = pilha(x);
 
     while (x != 0)
     {
         int z;
         cout << "Digite um valor a seguir\n=> ";
         cin >> z;
-        empilha(z, A);
+        organizar_pilha(z, A, B);
+        cout << "tam: " << A->tamanho << endl;
         x--;
     }
 
-    organizar_pilha(A);
+    imprimir_com_quebra_de_linha(A);
 }
-
 ```
 
 **2.5 Usando pilha, crie uma função para verificar se uma expressão composta apenas por chaves,
