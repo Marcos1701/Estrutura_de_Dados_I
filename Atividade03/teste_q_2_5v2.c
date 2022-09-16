@@ -1,4 +1,4 @@
-#include "pilha_caracter.h"
+#include "pilha_caracter_vetor.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -6,7 +6,7 @@ int conferir_expressao(char x[])
 {
 
     int k = strlen(x);
-    Pilha *aux = pilha();
+    Pilha *aux = pilha(k);
 
     for (int i = 0; i <= k; i++)
     {
