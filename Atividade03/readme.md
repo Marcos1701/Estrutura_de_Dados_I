@@ -169,54 +169,46 @@ expressões "[ { ( ) ( ) } { } ]" e "{ [ ( [ { } ] ) ] }" estão balanceadas, ma
 
 R-                                                                             
   ```
- #include "pilha_caracter.h"
- #include <stdio.h>
- #include <string.h>
+ #include "pilha_caracter_vetor.h"
+#include <stdio.h>
+#include <string.h>
 
 int conferir_expressao(char x[])
 {
 
     int k = strlen(x);
-    int valor_cont = 0;
-    Pilha *aux = pilha();
+    Pilha *aux = pilha(k);
 
-    for (int i = 0; i < k; i++)
+    for (int i = 0; i <= k; i++)
     {
         char z = x[i];
 
-        if (z == '(' || z == '[' || z == '{')
+        if (x[i] == '(' || x[i] == '[' || x[i] == '{')
         {
-            valor_cont = 1;
-            empilhar(z, aux);
-            printf("v : %s\n", z);
+            empilhar(x[i], aux);
+            printf("v : %c\n", x[i]);
         }
-        else if (z == ')' || z == ']' || z == '{')
+        else if (x[i] == ')' || x[i] == ']' || x[i] == '{')
         {
             if (vaziap(aux))
             {
                 destroi(aux);
+                return 0;
             }
             z = desempilha_com_retorno(aux);
-            if (x[i] == ')' && z != '(' || x[i] == ']' && z != '[' || x[i] == '{' && z != '}')
-            {
-                valor_cont = 0;
-            }
-            printf("v2 : %s\n", x[i]);
-        }
-        else
-        {
-            valor_cont = 1;
-        }
 
-        if (!valor_cont)
-            return 0;
-        break;
-        k++;
+            if ((x[i] == ')' && z != '(') || (x[i] == ']' && z != '[') || (x[i] == '{' && z != '}'))
+            {
+                return 0;
+            }
+            printf("v2 : %c\n", x[i]);
+        }
+        // k++;
     }
     return 1;
 }
 
-main()
+int main()
 {
 
     char expressao[50];
@@ -227,6 +219,8 @@ main()
         printf("Expressao balanceada\n");
     else
         printf("Expressao nao balanceada\n");
+
+    return 0;
 }
 ```
 
