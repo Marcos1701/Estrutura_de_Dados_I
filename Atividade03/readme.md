@@ -90,12 +90,13 @@ pelo usuário . A ideia é organizar a pilha A de modo que nenhum item seja empi
 
 R-                                                                                   
  ```
- #include <iostream>
+ 
+#include <iostream>
 #include "pilha_int_vetor.h"
 #include <stdbool.h>
 using namespace std;
 
-void organizar_pilha(int valor, Pilha *C, Pilha *D)
+void organizar_pilha(int valor, Pilha *C, Pilha *D) // Funcionando apenas um expressões sem espaço...
 {
     int k = C->tamanho - 1, aux, x = 0;
     cout << "k: " << k << endl;
@@ -170,8 +171,11 @@ expressões "[ { ( ) ( ) } { } ]" e "{ [ ( [ { } ] ) ] }" estão balanceadas, ma
 R-                                                                             
   ```
  #include "pilha_caracter_vetor.h"
+#include <iostream>
 #include <stdio.h>
 #include <string.h>
+
+using namespace std;
 
 int conferir_expressao(char x[])
 {
@@ -183,26 +187,31 @@ int conferir_expressao(char x[])
     {
         char z = x[i];
 
-        if (x[i] == '(' || x[i] == '[' || x[i] == '{')
+        if (z != ' ' && z != '\0')
         {
-            empilhar(x[i], aux);
-            printf("v : %c\n", x[i]);
-        }
-        else if (x[i] == ')' || x[i] == ']' || x[i] == '{')
-        {
-            if (vaziap(aux))
+            if (x[i] == '(' || x[i] == '[' || x[i] == '{')
             {
-                destroi(aux);
-                return 0;
+                empilhar(x[i], aux);
+                cout << "v : " << x[i] << endl;
             }
-            z = desempilha_com_retorno(aux);
+            else if (x[i] == ')' || x[i] == ']' || x[i] == '{')
+            {
+                if (vaziap(aux))
+                {
+                    destroi(aux);
+                    return 0;
+                }
+                z = desempilha_com_retorno(aux);
 
-            if ((x[i] == ')' && z != '(') || (x[i] == ']' && z != '[') || (x[i] == '{' && z != '}'))
-            {
-                return 0;
+                if ((x[i] == ')' && z != '(') || (x[i] == ']' && z != '[') || (x[i] == '{' && z != '}'))
+                {
+                    return 0;
+                }
+                cout << "v2 : " << x[i] << endl;
             }
-            printf("v2 : %c\n", x[i]);
         }
+        else
+            continue;
         // k++;
     }
     return 1;
@@ -212,16 +221,18 @@ int main()
 {
 
     char expressao[50];
-    printf("Digite a expressao a seguir :\n=> ");
-    scanf("%s", expressao);
+    cout << "Digite a expressao a seguir (*sem espacos):\n=> ";
+    cin >> expressao;
 
+    cout << "=> " << expressao;
     if (conferir_expressao(expressao))
-        printf("Expressao balanceada\n");
+        cout << "Expressao balanceada\n";
     else
-        printf("Expressao nao balanceada\n");
+        cout << "Expressao nao balanceada\n";
 
     return 0;
 }
+
 ```
 
 **2.6 Supondo que o usuário digite as cadeias "um", "dois" e "tres", qual será a saída exibida
