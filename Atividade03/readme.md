@@ -154,88 +154,64 @@ expressões "[ { ( ) ( ) } { } ]" e "{ [ ( [ { } ] ) ] }" estão balanceadas, ma
 
 R-                                                                             
   ```
-  #include <iostream>
-#include <stdbool.h>
-#include "pilha_char.h"
-using namespace std;
+ #include "pilha_caracter.h"
+ #include <stdio.h>
 
-bool conferir_caractere(char x, char y)
-{
-    switch (x)
-    {
-    case ')':
-
-        if (y == '(')
-            return true;
-        else
-            return false;
-        break;
-    case ']':
-        if (y == '[')
-            return true;
-        else
-            return false;
-        break;
-    case '}':
-        if (y == '{')
-            return true;
-        else
-            return false;
-        break;
-    }
-}
-
-bool conferir_expressao(string x, int tam)
+int conferir_expressao(char x[])
 {
 
-    char y, z;
-    int k = tam;
-    bool valor_cont = false;
+    int k = strlen(x);
+    int valor_cont = 0;
     Pilha *aux = pilha();
 
-    while (k >= 0)
+    for (int i = 0; i < k; i++)
     {
+        char z = x[i];
 
-        if (tam % 2 != 0)
+        if (z == '(' || z == '[' || z == '{')
         {
-            return false;
+            valor_cont = 1;
+            empilhar(z, aux);
+            printf("v : %s\n", z);
         }
-
-        if (x[k] == '(' || x[k] == '[' || x[k] == '{')
+        else if (z == ')' || z == ']' || z == '{')
         {
-            empilhar(&x[k], aux);
-        }
-        else if (x[k] == ')' || x[k] == ']' || x[k] == '}')
-        {
+            if (vaziap(aux))
+            {
+                destroi(aux);
+            }
             z = desempilha_com_retorno(aux);
-            valor_cont = conferir_caractere(x[k], z);
+            if (x[i] == ')' && z != '(' || x[i] == ']' && z != '[' || x[i] == '{' && z != '}')
+            {
+                valor_cont = 0;
+            }
+            printf("v2 : %s\n", x[i]);
+        }
+        else
+        {
+            valor_cont = 1;
         }
 
         if (!valor_cont)
-            return false;
+            return 0;
         break;
-        k--;
+        k++;
     }
-    return true;
+    return 1;
 }
 
 main()
 {
 
-    //  cout << "Digite a qtd de caracteres que a expressao possui: ";
-    // cin >> x;
+    char expressao[50];
+    printf("Digite a expressao a seguir :\n=> ");
+    scanf("%s", expressao);
 
-    string expressao;
-    cout << "Digite a expressao a seguir :\n=> ";
-    cin >> expressao;
-    int tam = expressao.length();
-
-    if (conferir_expressao(expressao, tam))
-        cout << "Expressao balanceada\n";
+    if (conferir_expressao(expressao))
+        printf("Expressao balanceada\n");
     else
-        cout << "Expressao nao balanceada\n";
+        printf("Expressao nao balanceada\n");
 }
-
 ```
 
 **2.6 Supondo que o usuário digite as cadeias "um", "dois" e "tres", qual será a saída exibida
