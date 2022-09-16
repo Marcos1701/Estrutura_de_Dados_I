@@ -1,81 +1,62 @@
+#include "pilha_caracter_vetor.h"
 #include <iostream>
-#include <stdbool.h>
-#include "pilha_char.h"
+#include <stdio.h>
+#include <string.h>
+
 using namespace std;
 
-bool conferir_caractere(char x, char y)
+int conferir_expressao(char x[])
 {
-    switch (x)
-    {
-    case ')':
 
-        if (y == '(')
-            return true;
+    int k = strlen(x);
+    Pilha *aux = pilha(k);
+
+    for (int i = 0; i <= k; i++)
+    {
+        char z = x[i];
+
+        if (z != ' ' && z != '\0')
+        {
+            if (x[i] == '(' || x[i] == '[' || x[i] == '{')
+            {
+                empilhar(x[i], aux);
+                cout << "v : " << x[i] << endl;
+            }
+            else if (x[i] == ')' || x[i] == ']' || x[i] == '{')
+            {
+                if (vaziap(aux))
+                {
+                    destroi(aux);
+                    return 0;
+                }
+                z = desempilha_com_retorno(aux);
+
+                if ((x[i] == ')' && z != '(') || (x[i] == ']' && z != '[') || (x[i] == '{' && z != '}'))
+                {
+                    return 0;
+                }
+                cout << "v2 : " << x[i] << endl;
+            }
+        }
         else
-            return false;
-        break;
-    case ']':
-        if (y == '[')
-            return true;
-        else
-            return false;
-        break;
-    case '}':
-        if (y == '{')
-            return true;
-        else
-            return false;
-        break;
+            continue;
+        // k++;
     }
+    return 1;
 }
 
-bool conferir_expressao(string x, int tam)
+int main()
 {
 
-    char y, z;
-    int k = tam;
-    bool valor_cont = false;
-    Pilha *aux = pilha();
-
-    while (k >= 0)
-    {
-
-        if (tam % 2 != 0)
-        {
-            return false;
-        }
-
-        if (x[k] == '(' || x[k] == '[' || x[k] == '{')
-        {
-            empilhar(&x[k], aux);
-        }
-        else if (x[k] == ')' || x[k] == ']' || x[k] == '}')
-        {
-            z = desempilha_com_retorno(aux);
-            valor_cont = conferir_caractere(x[k], z);
-        }
-
-        if (!valor_cont)
-            return false;
-        break;
-        k--;
-    }
-    return true;
-}
-
-main()
-{
-
-    //  cout << "Digite a qtd de caracteres que a expressao possui: ";
-    // cin >> x;
-
-    string expressao;
-    cout << "Digite a expressao a seguir :\n=> ";
+    char expressao[50];
+    cout << "Digite a expressao a seguir (*sem espacos):\n=> ";
     cin >> expressao;
-    int tam = expressao.length();
 
-    if (conferir_expressao(expressao, tam))
+    cout << "=> " << expressao;
+    if (conferir_expressao(expressao))
         cout << "Expressao balanceada\n";
     else
         cout << "Expressao nao balanceada\n";
+
+    return 0;
 }
