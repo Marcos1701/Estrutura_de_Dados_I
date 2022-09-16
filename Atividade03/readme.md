@@ -156,6 +156,7 @@ R-
   ```
  #include "pilha_caracter.h"
  #include <stdio.h>
+ #include <string.h>
 
 int conferir_expressao(char x[])
 {
