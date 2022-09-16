@@ -37,6 +37,7 @@ void empilha(int valor, Pilha *p)
     }
 
     printf("\nO valor: %d foi empilhado\n\n", valor);
+    return;
 }
 
 void desempilha(Pilha *p)
@@ -55,6 +56,27 @@ void desempilha(Pilha *p)
         printf("\nO valor: %d foi desempilhado\n", valor);
         printf("Tamanho atual da pilha: %d\n\n", p->tamanho);
     }
+    return;
+}
+
+int desempilha_com_retorno(Pilha *p)
+{
+    int valor = p->item[p->topo];
+
+    if (p->topo == -1)
+    {
+        printf("\nA pilha esta vazia\n\n");
+    }
+    else
+    {
+        p->item[p->topo] = 0;
+        p->topo--;
+        p->tamanho--;
+        return valor;
+        // printf("\nO valor: %d foi desempilhado\n", valor);
+        // printf("Tamanho atual da pilha: %d\n\n", p->tamanho);
+    }
+    return valor;
 }
 
 void imprimir_com_quebra_de_linha(Pilha *p)
@@ -73,6 +95,7 @@ void imprimir_com_quebra_de_linha(Pilha *p)
     {
         printf("A pilha esta vazia\n");
     }
+    return;
 }
 
 void imprimir_sem_quebra_de_linha(Pilha *p)
@@ -90,6 +113,7 @@ void imprimir_sem_quebra_de_linha(Pilha *p)
     {
         printf("A pilha esta vazia\n");
     }
+    return;
 }
 
 void destroi(Pilha *p)
@@ -100,4 +124,5 @@ void destroi(Pilha *p)
     {
         printf("Pilha destruida");
     }
+    return;
 }
