@@ -87,3 +87,6 @@ int main()
 
     return 0;
 }
+
+
+//ref: https://www.programming9.com/programs/c-programs/230-c-program-to-convert-infix-to-postfix-expression-using-stack
