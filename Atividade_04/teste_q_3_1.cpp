@@ -5,39 +5,68 @@
 #include <stdbool.h>
 using namespace std;
 
+int prio(char o)
+{
+
+    if (o == '(')
+        return 0;
+    else if (o == '-' || o == '+')
+        return 1;
+    else if (o == '*' || o == '/')
+        return 2;
+    return 0; // operador invalido!
+}
+
 char *gerar_sufixa(char *inf)
 {
-    char s[250];
+    char s[250], *x;
     int k = 0;
+    x = inf;
 
     Pilha *p = pilha(strlen(inf));
 
-    for (int i = 0; inf[i]; i++)
+    for (int i = 0; *x != '\0'; i++)
     {
-        if (inf[i] == '(')
+        if (isalnum(*x))
         {
-            empilha(inf[i], p);
+            cout << "valor emp: " << *x << endl;
+            s[k++] = *x;
+            s[k++] = ' ';
         }
-        else if (isdigit(inf[i]))
+        else if (*x == '(')
         {
-            cout << "valor emp: " << inf[i] << endl;
-            s[k++] = inf[i];
+            empilha(*x, p);
         }
-        else if (inf[i] == '*' || inf[i] == '+' || inf[i] == '/' || inf[i] == '-')
+        else if (*x == ')')
         {
-            cout << "valor emp: " << inf[i] << endl;            
-            empilha(inf[i], p);
+            while (p->item[p->topo] != '(')
+            {
+                s[k++] = desempilha(p);
+                s[k++] = ' ';
+            }
+            desempilha(p);
         }
-        else if (inf[i] == ')')
+        else
         {
-            s[k++] = desempilha(p);
+            while (prio(p->item[p->topo]) >= prio(*x))
+            {
+                s[k++] = desempilha(p);
+                s[k++] = ' ';
+            }
+            empilha(*x, p);
+            cout << "valor emp: " << *x << endl;
         }
-        s[k++] = '\0';
-        destroi(p);
-        return s;
+        x++;
     }
-
-    return "E";
+    while (p->topo != -1)
+    {
+        s[k++] = desempilha(p);
+        s[k++] = ' ';
+    }
+    s[k++] = '\0';
+    cout << "s: " << s << endl;
+    destroi(p);
+    return s;
 }
 
 int main()
@@ -49,16 +78,11 @@ int main()
          << "=> ";
     cin >> infixa;
 
-    char *sufixa = gerar_sufixa(infixa);
+    char *sufixa;
+    sufixa = gerar_sufixa(infixa);
+    //(sufixa, gerar_sufixa(infixa));
 
-    cout << "Infixa digitada: " << infixa << endl;
-
-    if (sufixa == "E")
-    {
-        cout << "Erro!!" << endl;
-        abort();
-    }
-
+    cout << "\nInfixa digitada: " << infixa << endl;
     cout << "Sufixa resultante: " << sufixa << endl;
 
     return 0;
