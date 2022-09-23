@@ -1,7 +1,6 @@
 #include <iostream>
 #include "pilha_int_vetor.h"
 #include <string.h>
-//#include <stdbool.h>
 #include <ctype.h>
 using namespace std;
 
@@ -49,7 +48,7 @@ int valor(char *valores)
             }
             else if (v == '&')
             {
-                if ((x) && (y) || (!x) && (!y))
+                if (x == y)
                     empilha('V', p);
                 else
                     empilha('F', p);
@@ -67,7 +66,7 @@ int valor(char *valores)
             }
         }
     }
-    int z = desempilha(p) == 'V' ? 1 : 0;
+    int z = desempilha(p) == 'V' ? 0 : 1;
     destroi(p);
 
     return z;
@@ -95,7 +94,7 @@ char *gerar_sufixa(char *inf)
         }
         else if (*x == ')')
         {
-            while (p->item[p->topo] != '(')
+            while (p->item[p->topo] != '(' && p->topo > -1)
             {
                 s[k++] = desempilha(p);
             }
@@ -103,7 +102,7 @@ char *gerar_sufixa(char *inf)
         }
         else
         {
-            while (prio(p->item[p->topo]) >= prio(*x))
+            while (prio(p->item[p->topo]) >= prio(*x) && p->topo > -1)
             {
                 s[k++] = desempilha(p);
             }
