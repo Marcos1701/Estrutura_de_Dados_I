@@ -2,7 +2,7 @@
 #include "pilha_int_vetor.h"
 #include <string.h>
 #include <ctype.h>
-#include <stdbool.h>
+#include <stdlib.h>
 using namespace std;
 
 int prio(char o)
@@ -17,9 +17,50 @@ int prio(char o)
     return 0; // operador invalido!
 }
 
+int valor(char *Values)
+{
+    Pilha *p = pilha(strlen(Values));
+    char v;
+    for (int i = 0; Values[i]; i++)
+    {
+        v = Values[i];
+        if (isalnum(v))
+        {
+            empilha(v - '0', p);
+        }
+        else
+        {
+            int x = desempilha(p);
+            int y = desempilha(p);
+
+            if (v == '+')
+            {
+                empilha(x + y, p);
+            }
+            else if (v == '-')
+            {
+                empilha(x - y, p);
+            }
+            else if (v == '*')
+            {
+                empilha(x * y, p);
+            }
+            else if (v == '/')
+            {
+                empilha(x / y, p);
+            }
+        }
+    }
+    static int z = desempilha(p);
+    destroi(p);
+    cout << "\nres : " << z << endl;
+    return z;
+}
+
 char *gerar_sufixa(char *inf)
 {
-    char s[250], *x;
+    static char s[250];
+    char *x;
     int k = 0;
     x = inf;
 
@@ -31,7 +72,6 @@ char *gerar_sufixa(char *inf)
         {
             cout << "valor emp: " << *x << endl;
             s[k++] = *x;
-            s[k++] = ' ';
         }
         else if (*x == '(')
         {
@@ -42,7 +82,6 @@ char *gerar_sufixa(char *inf)
             while (p->item[p->topo] != '(')
             {
                 s[k++] = desempilha(p);
-                s[k++] = ' ';
             }
             desempilha(p);
         }
@@ -51,7 +90,6 @@ char *gerar_sufixa(char *inf)
             while (prio(p->item[p->topo]) >= prio(*x))
             {
                 s[k++] = desempilha(p);
-                s[k++] = ' ';
             }
             empilha(*x, p);
             cout << "valor emp: " << *x << endl;
@@ -61,7 +99,6 @@ char *gerar_sufixa(char *inf)
     while (p->topo != -1)
     {
         s[k++] = desempilha(p);
-        s[k++] = ' ';
     }
     s[k++] = '\0';
     cout << "s: " << s << endl;
@@ -80,13 +117,13 @@ int main()
 
     char *sufixa;
     sufixa = gerar_sufixa(infixa);
+
+    int v = valor(sufixa);
     //(sufixa, gerar_sufixa(infixa));
 
     cout << "\nInfixa digitada: " << infixa << endl;
     cout << "Sufixa resultante: " << sufixa << endl;
+    cout << "Valor resultante: " << v << endl;
 
     return 0;
 }
-
-
-//ref: https://www.programming9.com/programs/c-programs/230-c-program-to-convert-infix-to-postfix-expression-using-stack
