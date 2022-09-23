@@ -1,68 +1,8 @@
 #include <iostream>
-#include "pilha_int_vetor.h"
 #include <string.h>
 #include <ctype.h>
-#include <stdlib.h>
+#include "pilha_int_vetor.h"
 using namespace std;
-
-typedef struct pilha
-{
-    int topo, max, tamanho = 0;
-    int *item;
-} Pilha;
-
-Pilha *pilha(int tam)
-{
-    Pilha *p = (Pilha *)malloc(sizeof(Pilha));
-    p->topo = -1;
-    p->item = (float *)malloc((tam) * sizeof(float));
-    p->max = tam;
-    return p;
-}
-
-void empilha(int valor, Pilha *p)
-{
-
-    if (p->topo == -1)
-    {
-        p->topo++;
-        p->tamanho++;
-        p->item[p->topo] = valor;
-    }
-    else if (p->topo == p->max)
-    {
-        printf("Pilha cheia");
-    }
-    else
-    {
-        p->topo++;
-        p->tamanho++;
-        p->item[p->topo] = valor;
-    }
-
-    printf("\nO valor: %d foi empilhado\n\n", valor);
-    return;
-}
-
-int desempilha(Pilha *p)
-{
-    int valor = p->item[p->topo];
-
-    if (p->topo == -1)
-    {
-        printf("\nA pilha esta vazia\n\n");
-    }
-    else
-    {
-        p->item[p->topo] = 0;
-        p->topo--;
-        p->tamanho--;
-        return valor;
-        // printf("\nO valor: %d foi desempilhado\n", valor);
-        // printf("Tamanho atual da pilha: %d\n\n", p->tamanho);
-    }
-    return valor;
-}
 
 int prio(char o)
 {
@@ -76,90 +16,80 @@ int prio(char o)
     return 0; // operador invalido!
 }
 
-int valor (char *x){
-    Pilha p = pilha(strlen(x));
-    for(int i = 0; x[i]; i++){
-        if(isdigit(x[i])){
-            empilha(x[i]-'0', p);
-        }else{
-            int x = desempilha(p);
-            int y = desempilha(p);
+char *posfixa_float(char *e)
+{
+    static char s[256];
+    Pilha *P = pilha(250);
+    int j = 0;
 
-            if (x[i] == '+'){
-              empilha(x + y, p);
-              break;
+    for (int i = 0; e[i]; i++)
+    {
+        if (e[i] == '(')
+            empilha('(', P);
+        else if (isalnum(e[i]) || e[i] == '.')
+            s[j++] = e[i];
+        else if (strchr("+-*/", e[i]))
+        {
+            s[j++] = ' ';
+
+            while ((prio(P->item[P->topo]) >= prio(e[i])) && P->topo > -1)
+            {
+                s[j++] = desempilha(P);
             }
-            else if (x[i] == '-'){
-                empilha(x - y, p);
-                break;
+            empilha(e[i], P);
+        }
+        else if (e[i] == ')')
+        {
+            while (P->item[P->topo] != '(' && P->topo > -1)
+            {
+                s[j++] = desempilha(P);
             }
-            else if (x[i] == '*'){
-                empilha(x * y, p);
-                break;
-            }else if(x[i] == '/'){
-                empilha(x / y, p);
-                break;
-            }
-            
+            desempilha(P);
         }
     }
-    int z = desempilha(p);
-    destroi(p);
 
-    return z;
+    while (P->topo > -1)
+    {
+        s[j++] = desempilha(P);
+    }
+    s[j] = '\0';
+    // destroi(P);
+    return s;
 }
 
-char *gerar_sufixa(char *inf)
+float valor_fl(char *e)
 {
-    static char s[250];
-    char *x;
-    int k = 0;
-    x = inf;
-
-    Pilha *p = pilha(strlen(inf));
-
-    for (int i = 0; *x != '\0'; i++)
-    {
-        if (isalnum(*x))
+    Pilha *P = pilha(250);
+    for (int i = 0; e[i]; i++)
+        if (isdigit(e[i]))
         {
-            cout << "valor emp: " << *x << endl;
-            s[k++] = *x;
-            s[k++] = ' ';
+            empilha(atof(e + i), P);
+            while (isdigit(e[i + 1]) || e[i + 1] == '.')
+                i++;
         }
-        else if (*x == '(')
+        else if (strchr("+-*/", e[i]))
         {
-            empilha(*x, p);
-        }
-        else if (*x == ')')
-        {
-            while (p->item[p->topo] != '(')
+            float y = desempilha(P);
+            float x = desempilha(P);
+            switch (e[i])
             {
-                s[k++] = desempilha(p);
-                s[k++] = ' ';
+            case '+':
+                empilha(x + y, P);
+                break;
+            case '-':
+                empilha(x - y, P);
+                break;
+            case '*':
+                empilha(x * y, P);
+                break;
+            case '/':
+                empilha(x / y, P);
+                break;
             }
-            desempilha(p);
         }
-        else
-        {
-            while (prio(p->item[p->topo]) >= prio(*x))
-            {
-                s[k++] = desempilha(p);
-                s[k++] = ' ';
-            }
-            empilha(*x, p);
-            cout << "valor emp: " << *x << endl;
-        }
-        x++;
-    }
-    while (p->topo != -1)
-    {
-        s[k++] = desempilha(p);
-        s[k++] = ' ';
-    }
-    s[k++] = '\0';
-    cout << "s: " << s << endl;
-    destroi(p);
-    return s;
+    float z = desempilha(P);
+    // destroi(P);
+    return z;
 }
 
 int main()
@@ -171,16 +101,15 @@ int main()
          << "=> ";
     cin >> infixa;
 
-    char *sufixa;
-    sufixa = gerar_sufixa(infixa);
-    
-    int valor = valor(sufixa);
-    //(sufixa, gerar_sufixa(infixa));
+    // char *posfixa;
+    // posfixa = posfixa_float(infixa);
+
+    // float v = valor_fl(posfixa);
+    //(posfixa, gerar_sufixa(infixa));
 
     cout << "\nInfixa digitada: " << infixa << endl;
-    cout << "Sufixa resultante: " << sufixa << endl;
-    cout << "Valor resultante: " << valor << endl;
-
+    cout << "Sufixa resultante: " << posfixa_float(infixa) << endl;
+    cout << "Valor resultante: " << valor_fl(posfixa_float(infixa)) << endl;
 
     return 0;
 }
