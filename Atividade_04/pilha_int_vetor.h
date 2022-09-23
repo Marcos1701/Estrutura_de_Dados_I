@@ -4,19 +4,19 @@
 typedef struct pilha
 {
     int topo, max, tamanho = 0;
-    int *item;
+    float *item;
 } Pilha;
 
 Pilha *pilha(int tam)
 {
     Pilha *p = (Pilha *)malloc(sizeof(Pilha));
     p->topo = -1;
-    p->item = (int *)malloc((tam) * sizeof(int));
+    p->item = (float *)malloc((tam) * sizeof(float));
     p->max = tam;
     return p;
 }
 
-void empilha(int valor, Pilha *p)
+void empilha(float valor, Pilha *p)
 {
 
     if (p->topo == -1)
@@ -40,9 +40,9 @@ void empilha(int valor, Pilha *p)
     return;
 }
 
-int desempilha(Pilha *p)
+float desempilha(Pilha *p)
 {
-    int valor = p->item[p->topo];
+    float valor = p->item[p->topo];
 
     if (p->topo == -1)
     {
