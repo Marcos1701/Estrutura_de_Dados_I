@@ -1,15 +1,14 @@
 #include <iostream>
 #include "pilha_int_vetor.h"
 #include <string.h>
+//#include <stdbool.h>
 #include <ctype.h>
 using namespace std;
 
 int prio(char o)
 {
 
-    if (o == '(')
-        return 0;
-    else if (o == '~')
+    if (o == '~')
         return 1;
     else if (o == '&')
         return 2;
@@ -18,48 +17,57 @@ int prio(char o)
     return 0; // operador invalido!
 }
 
-int valor (char *valores){
+int valor(char *valores)
+{
     Pilha *p = pilha(strlen(valores));
     char v;
-    for(int i = 0; valores[i]; i++){
+    for (int i = 0; valores[i]; i++)
+    {
         v = valores[i];
-        if(isdigit(valores[i])){
-            empilha(valores[i]-'0', p);
-        }else{
-            int x = desempilha(p);
-            int y = desempilha(p);
+        if (isdigit(valores[i]))
+        {
+            empilha(valores[i] - '0', p);
+        }
+        else
+        {
+            int x = desempilha(p) == 'V' ? 1 : 0;
+            int y = desempilha(p) == 'V' ? 1 : 0;
 
-            if (v == '~'){
-                if(x == 'V'){
-              empilha(y, p);
-              empilha('F', p);
-            }else{
-                empilha(y, p);
-                empilha('V', p);
-            }
-              break;
-            }
-            else if (v == '&'){
-                if((x == 'V' && y == 'V') && (x == 'F' && y == 'F'))
-                empilha('V', p);
-                else
-                empilha('F', p);
-                break;
-            }
-            else if (v == '|'){
-                if ((x == 'V' && y != 'V') || (x == 'F' && y != 'F') 
-                || (x == 'F' && y != 'F') 
-                || (x == 'V' && y != 'V')){
-                empilha('V', p);
+            if (v == '~')
+            {
+                if (x)
+                {
+                    empilha(y, p);
+                    empilha('F', p);
                 }
                 else
-                empilha('F', p);
+                {
+                    empilha(y, p);
+                    empilha('V', p);
+                }
                 break;
             }
-            
+            else if (v == '&')
+            {
+                if ((x) && (y) || (!x) && (!y))
+                    empilha('V', p);
+                else
+                    empilha('F', p);
+                break;
+            }
+            else if (v == '|')
+            {
+                if ((x) || (y))
+                {
+                    empilha('V', p);
+                }
+                else
+                    empilha('F', p);
+                break;
+            }
         }
     }
-    char z = desempilha(p);
+    int z = desempilha(p) == 'V' ? 1 : 0;
     destroi(p);
 
     return z;
@@ -104,7 +112,7 @@ char *gerar_sufixa(char *inf)
         }
         x++;
     }
-    while (p->topo != -1)
+    while (p->topo > -1)
     {
         s[k++] = desempilha(p);
     }
@@ -116,7 +124,6 @@ char *gerar_sufixa(char *inf)
 
 int main()
 {
-
     char infixa[150];
 
     cout << "Digite a expressao infixa a seguir: " << endl
@@ -125,14 +132,14 @@ int main()
 
     char *sufixa;
     sufixa = gerar_sufixa(infixa);
-    
-    int v = valor(sufixa);
     //(sufixa, gerar_sufixa(infixa));
 
     cout << "\nInfixa digitada: " << infixa << endl;
     cout << "Sufixa resultante: " << sufixa << endl;
-    cout << "Valor resultante: " << valor << endl;
-
+    if (valor(sufixa))
+        cout << "\nValor resultante: V" << endl;
+    else
+        cout << "\nValor resultante: F" << endl;
 
     return 0;
 }
