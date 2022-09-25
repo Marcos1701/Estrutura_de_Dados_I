@@ -49,7 +49,7 @@ public:
     }
 
     char pop()
-    // Confere se a fila está vazia, caso não esteja, retira o primeiro elemento...
+    // retira o primeiro elemento da fila, caso ela não esteja vazia..
     {
         char aux;
         No *aux_2 = NULL;
@@ -69,7 +69,7 @@ public:
         return aux;
     }
 
-    int isEmpty() // confere se a pilha está vazia
+    int isEmpty() // confere se a fila está vazia
     {
         return inicio == NULL;
     }
