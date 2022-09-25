@@ -28,7 +28,7 @@ public:
     }
 
     void push(char n)
-    // insere novos elementos na pilha
+    // insere novos elementos ao fim da pilha
     {
         No *no = new No(n);
 
