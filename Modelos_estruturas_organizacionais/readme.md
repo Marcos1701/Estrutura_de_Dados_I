@@ -1,3 +1,3 @@
 # ----____ Modelos Pilha e fila ____----
 
-- em forma de struct ou class...
+- No formato de classe
