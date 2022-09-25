@@ -28,6 +28,7 @@ public:
     }
 
     void push(char n)
+    // insere novos elementos na pilha
     {
         No *no = new No(n);
 
@@ -46,12 +47,14 @@ public:
     }
 
     char pop()
+    // retira o ultimo elemento da pilha, caso ela não esteja vazia..
     {
-        char aux = ' ';
+        char aux;
         if (topo == NULL)
         {
             cout << "Pilha vazia!!!" << endl
                  << endl;
+            aux = '\0';
         }
         else
         {
@@ -61,13 +64,13 @@ public:
         return aux;
     }
 
-    int isEmpty()
+    int isEmpty() // confere se a pilha está vazia
     {
         return topo == NULL;
     }
 };
 
-int msg()
+int msg() // exibe o menu e recebe a opção desejada...
 {
     cout << "1 - empilha" << endl
          << "2 - desempilha" << endl
@@ -87,17 +90,8 @@ int main()
     int op = msg();
     char aux;
 
-    // p->push('a');
-    // p->push('b');
-    // p->push('c');
-    // cout << "D: " << p->pop();
-    // cout << "D: " << p->pop();
-    // cout << "D: " << p->pop();
-    // cout << "D: " << p->pop();
-
     while (op != 0)
     {
-        // int x;
         if (op == 1)
         {
             cout << endl
@@ -108,9 +102,13 @@ int main()
         else if (op == 2)
         {
             aux = p->pop();
-            if (aux != ' ')
+            if (aux)
                 cout << "char desempilhado: " << aux << endl
                      << endl;
+        }
+        else
+        {
+            cout << "Opção inválida!!!" << endl;
         }
         op = msg();
     }
