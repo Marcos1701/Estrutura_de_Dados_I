@@ -33,3 +33,14 @@ R- A saída resultante será:
     return 0;
   }
   ```
+  Saída resultante: 
+  ```
+O caractere: 65 foi empilhado
+O caractere: 66 foi empilhado
+O caractere: 67 foi empilhado
+O caractere: 68 foi empilhado
+A
+B
+C
+D
+```
