@@ -1,122 +1,33 @@
-#include <stdio.h>
+//palindroma.c - verifica se uma cadeia e palindroma
 #include <iostream>
-#include <stdlib.h>
-#include <string.h>
+#include <stdio.h>
+#include <ctype.h>
+#include "pilha.h" // pilha de char
+#include "fila_char.h" // fila de char
 
 using namespace std;
 
-class No
-{
-public:
-    char nome;
-    No *prox;
-    No(char n)
-    {
-        nome = n;
-        prox = NULL;
-    }
-};
-
-class Fila
-{
-public:
-    No *inicio;
-    No *fim;
-
-    Fila()
-    {
-        inicio = NULL;
-        fim = NULL;
+int main ( void ) {
+  string  s;
+  char x,y;
+  Fila *F = new Fila();
+  Pilha *P = new Pilha();
+  cout << "\nFrase ? ";
+  cin >> s;
+  for (int i = 0;s[i];i++)
+    if (isalpha(s[i])){
+      F->push(s[i]);
+      P->push(s[i]);
     }
 
-    void push(char n) // Insere elementos no fim da fila
-    {
-        No *no = new No(n);
-
-        if (inicio == NULL)
-        {
-            inicio = no;
-            fim = inicio;
-        }
-        else
-        {
-            fim->prox = no;
-            fim = no;
-        }
-        cout << "\nO caractere: " << n << " foi empilhado" << endl
-             << endl;
-        return;
-    }
-
-    char pop()
-    // retira o primeiro elemento da fila, caso ela não esteja vazia..
-    {
-        char aux;
-        No *aux_2 = NULL;
-        if (inicio == NULL)
-        {
-            cout << "Fila vazia!!!" << endl
-                 << endl;
-            aux = '\0';
-        }
-        else
-        {
-            aux_2 = inicio;
-            aux = inicio->nome;
-            inicio = inicio->prox;
-        }
-        free(aux_2);
-        return aux;
-    }
-
-    int isEmpty() // confere se a fila está vazia
-    {
-        return inicio == NULL;
-    }
-};
-
-int msg() // exibe o menu e recebe a opção desejada...
-{
-    cout << "1 - empilha" << endl
-         << "2 - desempilha" << endl
-         << "0 - sair" << endl
-         << "=> ";
-    int x;
-    cin >> x;
-    return x;
-}
-
-int main()
-{
-
-    cout << "Teste fila class..." << endl;
-
-    Fila *p = new Fila();
-    int op = msg();
-    char aux;
-
-    while (op != 0)
-    // menu de teste
-    {
-        if (op == 1)
-        {
-            cout << endl
-                 << "emp => ";
-            cin >> aux;
-            p->push(aux);
-        }
-        else if (op == 2)
-        {
-            aux = p->pop();
-            if (aux)
-                cout << "char desempilhado: " << aux << endl
-                     << endl;
-        }
-        else
-        {
-            cout << "Opção inválida!!!" << endl;
-        }
-        op = msg();
-    }
-    cout << "Bay Bay..." << endl;
+   x = F->pop();
+   y = P->pop();
+  while ((!F->isEmpty()) && (x == y)){
+    if ( F->isEmpty()) cout << " A frase e palindroma " << endl;
+    else cout << " A frase nao e palindroma " << endl;
+    
+    x = F->pop();
+    y = P->pop();
+  }
+  return 0;
 }
