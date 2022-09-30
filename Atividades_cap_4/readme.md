@@ -35,7 +35,7 @@ R- A saída resultante será:
   ```
   Saída resultante: 
   ```
-O caractere: 65 foi empilhado
+O caractere: 65 foi empilhado (isso ocorre pq usei uma fila de inteiros...)
 O caractere: 66 foi empilhado
 O caractere: 67 foi empilhado
 O caractere: 68 foi empilhado
