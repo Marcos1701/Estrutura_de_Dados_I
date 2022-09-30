@@ -1,34 +1,22 @@
-// palindroma.c - verifica se uma cadeia e palindroma
-#include <iostream>
 #include <stdio.h>
-#include <ctype.h>
-#include "pilha.h" // pilha de char
-#include "fila.h"  // fila de char
-
-using namespace std;
-
+#include "fila_int.h" // fila de int
+#define tempo 3       // tempo maximo de uso de CPU
 int main(void)
 {
-    char s[250];
     Fila *F = new Fila();
-    Pilha *P = new Pilha();
-    cout << "\nFrase ? ";
-    gets(s);
-    for (int i = 0; s[i]; i++)
+    F->push(17);
+    F->push(25);
+    F->push(39);
+    F->push(46);
+    while (!F->isEmpty())
     {
-        if (isalpha(s[i]))
-        {
-            F->push(toupper(s[i]));
-            P->push(toupper(s[i]));
-        }
+        int x = F->pop();
+        int p = x / 10;
+        int t = x % 10;
+        if (t > 3)
+            F->push(p * 10 + (t - tempo));
+        else
+            printf("Processo %d concluido\n", p);
     }
-
-    while (!F->isEmpty() && F->pop() == P->pop())
-        ;
-
-    if (F->isEmpty())
-        cout << " A frase e palindroma " << endl;
-    else
-        cout << " A frase nao e palindroma " << endl;
     return 0;
 }
