@@ -5,12 +5,12 @@
 
 using namespace std;
 
-class No
+class no
 {
 public:
     char nome;
-    No *prox;
-    No(char n)
+    no *prox;
+    no(char n)
     {
         nome = n;
         prox = NULL;
@@ -20,7 +20,7 @@ public:
 class Pilha
 {
 public:
-    No *topo;
+    no *topo;
 
     Pilha()
     {
@@ -30,16 +30,16 @@ public:
     void push(char n)
     // insere novos elementos ao fim da pilha
     {
-        No *no = new No(n);
+        no *No = new no(n);
 
         if (topo == NULL)
         {
-            topo = no;
+            topo = No;
         }
         else
         {
-            no->prox = topo;
-            topo = no;
+            No->prox = topo;
+            topo = No;
         }
         cout << "\nO caractere: " << n << " foi empilhado" << endl
              << endl;
