@@ -8,11 +8,11 @@ using namespace std;
 class No
 {
 public:
-    int num;
+    char caractere;
     No *prox;
-    No(int n)
+    No(char n)
     {
-        num = n;
+        caractere = n;
         prox = NULL;
     }
 };
@@ -29,7 +29,7 @@ public:
         fim = NULL;
     }
 
-    void push(int n) // Insere elementos no fim da fila
+    void push(char n) // Insere elementos no fim da fila
     {
         No *no = new No(n);
 
@@ -43,7 +43,7 @@ public:
             fim->prox = no;
             fim = no;
         }
-        cout << "\nO caractere: " << n << " foi empilhado" << endl
+        cout << "\nO caractere: " << n << " foi emfileirado" << endl
              << endl;
         return;
     }
@@ -51,7 +51,7 @@ public:
     char pop()
     // retira o primeiro elemento da fila, caso ela não esteja vazia..
     {
-        int aux;
+        char aux;
         No *aux_2 = NULL;
         if (inicio == NULL)
         {
@@ -62,15 +62,32 @@ public:
         else
         {
             aux_2 = inicio;
-            aux = inicio->num;
+            aux = inicio->caractere;
             inicio = inicio->prox;
         }
         free(aux_2);
         return aux;
     }
 
-    int isEmpty() // confere se a fila está vazia
+    char isEmpty() // confere se a fila está vazia
     {
         return inicio == NULL;
+    }
+
+    void exibir()
+    {
+        No *aux = inicio;
+
+        if (!isEmpty())
+        {
+            while (aux)
+            {
+                cout << "=> " << aux->caractere
+                     << endl;
+                inicio = inicio->prox;
+                aux = inicio;
+            }
+        }
+        return;
     }
 };
