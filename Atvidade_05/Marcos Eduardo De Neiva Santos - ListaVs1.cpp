@@ -43,10 +43,6 @@ int procura(int mat)
         }
     }
 
-    if (aux == -1)
-    {
-        cout << "Matricula nao encontrada!!" << endl;
-    }
     return aux;
 }
 
@@ -68,6 +64,7 @@ void mostrar(int pos)
 // procura o elemento e depois mostra o elemento encontrado (se nao for encontrado informa q ele nao existe)
 void consultar(int mat)
 {
+    cout << "--------- Consultar ---------" << endl;
     Aluno *aux = new Aluno();
     int tam = (sizeof(lista) / sizeof(Aluno));
     int x = 0;
@@ -128,7 +125,7 @@ void remover00()
             cout << "Matricula invalida!!\n"
                  << endl;
         }
-        cout << "Deseja remover algum aluno? (1-sim/2-nao): ";
+        cout << "Deseja remover outro aluno? (1-sim/2-nao): ";
         cin >> cont;
     } while (cont == 1);
 }
@@ -174,7 +171,7 @@ void remover01()
             cout << "Matricula invalida!!\n"
                  << endl;
         }
-        cout << "Deseja remover algum aluno? (1-sim/2-nao): ";
+        cout << "Deseja remover outro aluno? (1-sim/2-nao): ";
         cin >> cont;
     } while (cont == 1);
 }
@@ -189,31 +186,79 @@ void remover01()
 //  return;
 //}
 
+void menu()
+{
+    cout << "----------- Menu ----------" << endl
+         << "\n1 - Inserir Aluno" << endl
+         << "2 - Remover Aluno (remover 00)" << endl
+         << "3 - Remover Aluno (remover 01)" << endl
+         << "4 - Consultar Matricula Aluno" << endl
+         << "\n0 - Sair\n"
+         << endl
+         << "=> ";
+
+    return;
+}
+
+Aluno *solicitar_dados_Aluno()
+{
+
+    cout << "--------- Inserir Novo Aluno ---------" << endl;
+    Aluno *aux = new Aluno();
+    int mat;
+    string nome;
+    cout << "Insira a Matricula do Aluno: ";
+    cin >> mat;
+
+    while (procura(mat) != -1)
+    {
+        cout << "Matricula invalida!!" << endl;
+        cout << "Insira a Matricula do Aluno: ";
+        cin >> mat;
+    }
+
+    aux->mat = mat;
+
+    cout << "Insira o nome do Aluno: ";
+    cin >> nome;
+
+    aux->nome = nome;
+    return aux;
+}
+
 main()
 {
-    Aluno *a = new Aluno(), *b = new Aluno(), *c = new Aluno(), *d = new Aluno();
-    a->mat = 0;
-    a->nome = "José";
+    int op;
+    do
+    {
+        menu();
+        cin >> op;
 
-    b->mat = 1;
-    b->nome = "Carlos";
+        if (op == 1)
+        {
+            Aluno *e = solicitar_dados_Aluno();
+            incluirDesordenado(e);
+        }
+        else if (op == 2)
+        {
+            remover00();
+        }
+        else if (op == 3)
+        {
+            remover01();
+        }
+        else if (op == 4)
+        {
+            int mat;
+            cout << "Insira a Matricula do Aluno: ";
+            cin >> mat;
+            consultar(mat);
+        }
+        else if (op != 0)
+        {
+            cout << "Opcao invalida!!!" << endl;
+        }
+    } while (op != 0);
 
-    c->mat = 2;
-    c->nome = "Andre";
-
-    d->mat = 3;
-    d->nome = "Marcos";
-
-    incluirDesordenado(a);
-    incluirDesordenado(b);
-    incluirDesordenado(c);
-    incluirDesordenado(d);
-
-    mostrar(2);
-
-    consultar(4);
-    consultar(3);
-
-    remover00();
-    // remover01();
+    cout << "Programa encerrado, Bay Bay" << endl;
 }
