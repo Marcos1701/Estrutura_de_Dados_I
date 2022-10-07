@@ -2,172 +2,218 @@
 #include <iostream>
 using namespace std;
 
-typedef struct aluno{
-	int mat;
-	string nome;	
-}Aluno; 
+typedef struct aluno
+{
+    int mat;
+    string nome;
+} Aluno;
 
 Aluno lista[30];
 
+void incluirDesordenado(Aluno *e)
+{
+    int index = -1;
 
-void incluirDesordenado(Aluno e){
-	int index = 0;
-	for(int i = 0; lista[i].mat; i++){index++;}
+    for (int i = 0; lista[i].mat > 0; i++)
+    {
+        index++;
+    }
 
-	if(index < 30){
-       lista[index] = e;
-	}else{
-		cout << "Erro, A lista está cheia!!" << endl;
-	}
-	return;
+    if (index < 29)
+    {
+        lista[index + 1] = *e;
+    }
+    else
+    {
+        cout << "Erro, A lista esta cheia!!" << endl;
+    }
 }
 
-//retorna a posicao do elemento procurado
-int procura(int mat){	
-	int aux;
-	for(int i = 0;lista[i].mat;i++){
+// retorna a posicao do elemento procurado
+int procura(int mat)
+{
+    int aux = -1;
+    int tam = (sizeof(lista) / sizeof(Aluno));
+    for (int i = 0; i < tam; i++)
+    {
 
-		if(lista[i].mat == mat){
-			aux = i;
-		}
-	}
+        if (lista[i].mat == mat)
+        {
+            aux = i;
+        }
+    }
 
-	if(aux){
-		cout << "Matricula não encontrada!!" << endl;
-	}
-	return aux;
+    if (aux == -1)
+    {
+        cout << "Matricula nao encontrada!!" << endl;
+    }
+    return aux;
 }
 
-//recebe a posicao e imprime o elemento na tela
-void mostrar(int pos){
+// recebe a posicao e imprime o elemento na tela
+void mostrar(int pos)
+{
 
-	Aluno aux = lista[pos];
+    int tam = (sizeof(lista) / sizeof(Aluno));
 
-	if(aux.mat){
-		cout << "Matricula do aluno: " << aux.nome << endl;
-        cout << "Nome do aluno: " << aux.nome << endl;
-	}
-	return;
+    if (pos < tam && pos > -1)
+    {
+        Aluno aux = lista[pos];
+        cout << "\nMatricula do aluno: " << aux.mat << endl;
+        cout << "Nome do aluno: " << aux.nome << endl
+             << endl;
+    }
 }
 
-//procura o elemento e depois mostra o elemento encontrado (se nao for encontrado informa q ele nao existe)
-void consultar(int mat){
-	Aluno aux;
-	for(int i = 0; lista[i].mat; i++){
-		if(lista[i].mat == mat){
-			aux = lista[i];
-		}
-	}
+// procura o elemento e depois mostra o elemento encontrado (se nao for encontrado informa q ele nao existe)
+void consultar(int mat)
+{
+    Aluno *aux = new Aluno();
+    int tam = (sizeof(lista) / sizeof(Aluno));
+    int x = 0;
 
-	if(aux.mat){
-	   cout << "Matricula do aluno: " << aux.nome << endl;
-       cout << "Nome do aluno: " << aux.nome << endl;
-	}else{
-		cout << "não existe nenhum aluno cadastrado com essa matricula!!!!" << endl;
-	}	
-	return;
+    for (int i = 0; i < tam; i++)
+    {
+        if (lista[i].mat == mat)
+        {
+            *aux = lista[i];
+            x = 1;
+            break;
+        }
+    }
+
+    if (x)
+    {
+        cout << "\nMatricula do aluno: " << aux->mat << endl;
+        cout << "Nome do aluno: " << aux->nome << endl
+             << endl;
+    }
+    else
+    {
+        cout << "\nNao existe nenhum aluno cadastrado com essa matricula!!!!" << endl;
+    }
 }
 
-//estrat�gia 1: colocar o ultimo elemento da lista na posi��o do elemento removido
-void remover00(){
-	    int cont;
-    do{
-		int mat, pos;
-	    cout << endl << "--- Remover  Aluno ----" << endl;
-        cin >> cont;
-		cout << "Digite a Matricula do aluno: ";
-		cin >> mat;
+// estrat�gia 1: colocar o ultimo elemento da lista na posi��o do elemento removido
+void remover00()
+{
+    int cont;
+    do
+    {
+        int mat, pos;
+        cout << "\n--- Remover  Aluno ----" << endl;
+        cout << "Digite a Matricula do aluno: ";
+        cin >> mat;
         pos = procura(mat);
 
-		if(pos){
-			int index_ultimo = 0;
+        if (pos != -1)
+        {
+            int index_ultimo = 0;
 
-        	for(int i = 0;lista[i].mat; i++) index_ultimo++;
+            for (int i = 0; lista[i].mat; i++)
+                index_ultimo++;
 
-            if(index_ultimo!= pos){
-              lista[pos] = lista[index_ultimo];
-	        }else{
-		      lista[pos] = lista[pos+1];
-	        }
-		}else{
-			cout << "Matricula inválida!!" << endl;
-		}
-	    cout << "Deseja remover algum aluno? (1-sim/2-nao): " << endl;
+            if (index_ultimo != pos)
+            {
+                lista[pos] = lista[index_ultimo];
+            }
+            else
+            {
+                lista[pos] = lista[pos + 1];
+            }
+            cout << "Aluno removido com sucesso!!" << endl;
+        }
+        else
+        {
+            cout << "Matricula invalida!!\n"
+                 << endl;
+        }
+        cout << "Deseja remover algum aluno? (1-sim/2-nao): ";
         cin >> cont;
-		return;
-	}while(cont == 1);
+    } while (cont == 1);
 }
-//void remover00(int pos){
+// void remover00(int pos){
 //	int index_ultimo = 0;
 //
 //	for(int i = 0;lista[i].mat; i++) index_ultimo++;
 //
-//    if(index_ultimo!= pos){
-//    lista[pos] = lista[index_ultimo];
+//     if(index_ultimo!= pos){
+//     lista[pos] = lista[index_ultimo];
 //	}else{
 //		lista[pos] = lista[pos+1];
 //	}
 //	return;
-//}
+// }
 
+// estrat�gia 2: mover TODOS os elementos que est�o AP�S  o elemento que deve ser removido UMA POSI��O A FRENTE.
 
-//estrat�gia 2: mover TODOS os elementos que est�o AP�S  o elemento que deve ser removido UMA POSI��O A FRENTE.
+void remover01()
+{
 
-void remover01(){
-
-   int cont;
-    do{
-	    cout << "/n--- Remover  Aluno ----\n" << endl;
-        cin >> cont;
-		int mat, pos;
-		cout << "Digite a Matricula do aluno: ";
-		cin >> mat;
+    int cont;
+    do
+    {
+        cout << "\n--- Remover  Aluno ----" << endl;
+        int mat, pos;
+        cout << "Digite a Matricula do aluno: ";
+        cin >> mat;
         pos = procura(mat);
 
-		if(pos){
+        if (pos != -1)
+        {
 
-        	for(int i = 0;lista[i].mat; i++){
-				lista[i] = lista[i + 1];
-			}
-		}else{
-			cout << "Matricula inválida!!" << endl;
-		}
-	    cout << "Deseja remover algum aluno? (1-sim/2-nao): " << endl;
+            for (int i = 0; lista[i].mat; i++)
+            {
+                lista[i] = lista[i + 1];
+            }
+            cout << "\nAluno removido com sucesso!!\n"
+                 << endl;
+        }
+        else
+        {
+            cout << "Matricula invalida!!\n"
+                 << endl;
+        }
+        cout << "Deseja remover algum aluno? (1-sim/2-nao): ";
         cin >> cont;
-	}while(cont == 1);
-	return;
+    } while (cont == 1);
 }
 
-//void remover01(int pos){
+// void remover01(int pos){
 
 //   int aux;
 //	for(int i = pos;lista[i].mat;i++){
 //		lista[i] = lista[i+1];
 //		aux = i;
 //	}
-  //  return;
+//  return;
 //}
 
-main(){
-	Aluno a, b, c, d;
-	a.mat = 0;
-	a.nome = "José";
-	b.mat = 1;
-	b.nome = "Carlos";
-	c.mat = 2;
-	c.nome = "Andre";
-	d.mat = 3;
-	d.nome = "Marcos";
+main()
+{
+    Aluno *a = new Aluno(), *b = new Aluno(), *c = new Aluno(), *d = new Aluno();
+    a->mat = 0;
+    a->nome = "José";
 
-	incluirDesordenado(a);
-	incluirDesordenado(b);
-	incluirDesordenado(c);
-	incluirDesordenado(d);
-	
-	mostrar(2);
-	consultar(4);
-	consultar(3);
+    b->mat = 1;
+    b->nome = "Carlos";
+
+    c->mat = 2;
+    c->nome = "Andre";
+
+    d->mat = 3;
+    d->nome = "Marcos";
+
+    incluirDesordenado(a);
+    incluirDesordenado(b);
+    incluirDesordenado(c);
+    incluirDesordenado(d);
+
+    mostrar(2);
+
+    consultar(4);
+    consultar(3);
 
     remover00();
-    remover01();
+    // remover01();
 }
