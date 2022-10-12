@@ -94,14 +94,14 @@ public:
 
         if (aluno == NULL)
         {
-            // cout << "Matricula nao encontrada!!!" << endl;
+            cout << "Matricula nao encontrada, aluno inexistente!!!" << endl;
             return 1;
         }
         No *aux = aluno->prox;
 
         aluno->prox = aux->prox;
         free(aux);
-        // cout << "Aluno removido com sucesso" << endl;
+        cout << "Aluno removido com sucesso" << endl;
         return 0;
     }
 
