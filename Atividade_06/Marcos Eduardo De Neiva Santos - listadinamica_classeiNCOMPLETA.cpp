@@ -158,6 +158,21 @@ public:
         }
         return lista;
     }
+    
+   //  void *crialistainversa()
+   // {
+
+   //     Lista *lista = new Lista();
+   //     No *aux = inicio;
+
+   //     while (aux != NULL)
+   //     {
+   //         lista->addToInicio(aux->mat, aux->nome);
+   //         aux = aux->prox;
+   //     }
+        //return lista;
+    //}
+    
 
     // inverter a propria lista
     void listainvertida()
@@ -169,6 +184,22 @@ public:
         free(f);
         return;
     }
+    
+    //void listainvertida()
+   // {
+   //     Lista *lista = new Lista();
+   //     No *aux = inicio;
+
+//        while (aux != NULL)
+ //       {
+   //         lista->addToInicio(aux->mat, aux->nome);
+  //          aux = aux->prox;
+  //      }
+ //       inicio = lista->inicio;
+
+ //       free(lista);
+ //       return;
+ //   }
 };
 
 int main()
