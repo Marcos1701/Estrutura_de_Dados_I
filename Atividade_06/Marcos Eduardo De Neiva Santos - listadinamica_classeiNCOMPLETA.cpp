@@ -97,10 +97,16 @@ public:
             cout << "Matricula nao encontrada, aluno inexistente!!!" << endl;
             return 0;
         }
-        No *aux = aluno->prox;
-
-        aluno->prox = aux->prox;
-        free(aux);
+        
+        if(aluno->mat == inicio->mat){
+          inicio = inicio->prox;
+          free(aluno);
+          return 1;
+        }
+        No *aux = inicio;
+        while(aux->prox->mat != aluno->mat){ aux = aux->prox;}
+        aux->prox = aluno->prox;
+        free(aluno);
         cout << "Aluno removido com sucesso" << endl;
         return 1;
     }
