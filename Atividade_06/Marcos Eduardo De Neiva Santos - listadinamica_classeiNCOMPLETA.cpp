@@ -95,14 +95,14 @@ public:
         if (aluno == NULL)
         {
             cout << "Matricula nao encontrada, aluno inexistente!!!" << endl;
-            return 1;
+            return 0;
         }
         No *aux = aluno->prox;
 
         aluno->prox = aux->prox;
         free(aux);
         cout << "Aluno removido com sucesso" << endl;
-        return 0;
+        return 1;
     }
 
     // auxiliar no metodo remove, vai
