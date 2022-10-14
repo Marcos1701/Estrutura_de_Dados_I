@@ -159,31 +159,27 @@ public:
         return lista;
     }
     
-   //  void *crialistainversa()
-   // {
-
-   //     Lista *lista = new Lista();
-   //     No *aux = inicio;
-
-   //     while (aux != NULL)
-   //     {
-   //         lista->addToInicio(aux->mat, aux->nome);
-   //         aux = aux->prox;
-   //     }
-        //return lista;
-    //}
-    
 
     // inverter a propria lista
+    
     void listainvertida()
     {
-        No *aux = inicio;
-        Lista *f = crialistainversa();
-        inicio = f->inicio;
+        No *atual = inicio, *anterior = atual->prox, *proximo = NULL;
+        atual->prox = NULL;
+        fim = atual;
 
-        free(f);
+        while (anterior != NULL)
+        {
+            proximo = anterior->prox;
+            anterior->prox = atual;
+            atual = anterior;
+            anterior = proximo;
+        }
+        inicio = atual;
+
         return;
     }
+    
     
     //void listainvertida()
    // {
