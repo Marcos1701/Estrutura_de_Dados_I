@@ -211,8 +211,11 @@ int main()
     l->addToFinal(1, "Joao");
     l->addToFinal(2, "Gabriela");
     l->addToFinal(3, "Fabiola");
+    //l->removeTodos();
     l->addToInicio(5, "Joana Oliveira");
     l->addToInicio(6, "Cristiano Oliveira");
+    //l->remove(6);
+
     l->mostra();
 
     l->listainvertida();
