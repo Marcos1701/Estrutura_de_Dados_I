@@ -27,6 +27,10 @@ int main(void)
 
 R-
 
+```
+   //A resposta está no arquivo Q1.cpp
+ ```
+
 (10.2) Usando o tipo Lista, faça um programa para ler uma sequencia aleatoria de n inteiros e
 exibir a sequência correspondente em ordem decrescente.
 
