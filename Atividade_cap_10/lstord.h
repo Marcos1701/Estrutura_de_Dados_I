@@ -156,72 +156,26 @@ public:
     }
 };
 
-class termo
-{
-public:
-    float item;
-    int expo;
-    termo *prox;
-    termo(float m, int e)
-    {
-        item = m;
-        expo = e;
-        prox = NULL;
-    }
-};
 
-class Poli
-{
 
-public:
+typedef struct poli{
+
     float coef;
     int expo;
-    termo *inicio;
-    termo *fim;
+    struct poli *prox;
+} *Poli;
 
-    Poli()
-    {
-        inicio = NULL;
-        fim = NULL;
-    }
+Poli termo(float c, int e,  Poli p){
+    Poli n = (Poli)malloc(sizeof(struct Poli));
+    n->coef = c;
+    n->expo = e;
+    n->prox = p;
+    return n;
+}
 
-    void ins(float c, int e)
-    {
-
-        termo *novo = new termo(c, e);
-        if (inicio == NULL)
-        {
-            inicio = novo;
-            return;
-        }
-        termo *atual = inicio;
-        while (atual != NULL && atual->item < e)
-            atual = atual->prox;
-
-        novo->prox = atual->prox;
-        atual->prox = novo;
-
-        return;
-    }
-
-    void mostra()
-    {
-        if (inicio == NULL)
-        {
-            printf("\nPolinomio vazio!!!");
-        }
-        else
-        {
-            termo *aux = inicio;
-            for (int i = 0; aux != NULL; aux = aux->prox)
-            {
-                if (expo > 1 || expo < 0)
-                    printf("%2.fx^%d", aux->item, aux->expo);
-                else
-                    printf("%2.f", aux->item);
-                i++;
-            }
-            printf("\n");
-        }
-    }
-};
+void exibeop(Poli P){
+    if(P == NULL) return;
+    printf("%+.lf", P->coef);
+    if(P->expo != 0) printf("x^%d", P->expo);
+    exibeop(P->prox);
+}
