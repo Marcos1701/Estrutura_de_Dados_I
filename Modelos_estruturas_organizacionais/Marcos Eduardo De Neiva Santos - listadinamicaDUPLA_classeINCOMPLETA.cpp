@@ -68,30 +68,24 @@ public:
 	void addOrd(int m, string n)
 	{
 		No *novo = new No(m, n);
-		if (inicio == NULL)
-			inicio = novo;
+
+		if (inicio == NULL || inicio->mat > m)
+			addToIni(m, n);
 		else
 		{
 			No *aux = inicio;
 
-			while (aux->prox && aux->mat < m)
+			while (aux->prox && aux->prox->mat < m)
 			{
 				cout << aux->mat << endl;
 				aux = aux->prox;
 			}
-			if (aux->mat > m)
-			{
-				aux->ant = novo;
-				novo->prox = aux;
-				inicio = novo;
-			}
-			else
-			{
+			novo->prox = aux->prox;
+			if (aux->prox)
+				aux->prox->ant = novo;
+			novo->ant = aux;
+			aux->prox = novo;
 
-				novo->ant = aux;
-				novo->prox = aux->prox;
-				aux->prox = novo;
-			}
 			if (aux == fim)
 				fim = novo;
 		}
@@ -169,22 +163,34 @@ public:
 				 << endl;
 		return deu_certo;
 	}
+
 	int remover(int m)
 	{
 		No *aux = inicio;
 		int achou = 0;
 		if (inicio)
 		{
-			while (aux)
+			if (inicio->mat == m)
 			{
-				if (aux->mat == m)
+				inicio = inicio->prox;
+				free(aux);
+				achou = 1;
+			}
+			else
+			{
+				while (aux && aux->mat != m)
 				{
+					aux = aux->prox;
+				}
+				if (aux && aux->mat == m)
+				{
+					// cout << "Valor removido: " << aux->mat << endl;
 					achou = 1;
 					aux->ant->prox = aux->prox;
 					aux->prox->ant = aux->ant;
+					if (aux == fim)
+						fim = aux->ant;
 					free(aux);
-					aux = NULL;
-					break;
 				}
 			}
 			// if (!aux)
@@ -195,6 +201,7 @@ public:
 		return achou;
 	}
 };
+
 main()
 {
 	Lista *l = new Lista();
@@ -204,11 +211,19 @@ main()
 	// l->mostra();
 	l->addOrd(8, "Joao");
 	l->addOrd(4, "Fabio");
-	l->mostraIniFim();
-	// l->mostraFimIni();
-	if (l->remover(4) == 1)
-		cout << "Elemento removido!!";
+	// l->mostraIniFim();
+	l->mostraFimIni();
+	// if (l->remover(4))
+	if (l->remover(3))
+	{
+		cout << "Elemento removido!!\n"
+			 << endl;
+	}
 	else
-		cout << "Elemento nao encontrado!!";
+	{
+		cout << "Elemento nao encontrado!!\n"
+			 << endl;
+	}
+
 	l->mostraIniFim();
 }
