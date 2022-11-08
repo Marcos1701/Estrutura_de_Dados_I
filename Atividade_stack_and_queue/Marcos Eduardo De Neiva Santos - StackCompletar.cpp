@@ -11,7 +11,7 @@ protected:
 public:
     T popStack()
     {
-        T tmp = pilha.top();
+        static T tmp = pilha.top();
         pilha.pop();
         return tmp;
     }
@@ -20,7 +20,7 @@ public:
     {
         while (!pilha.empty())
         {
-            cout << "=> " << pilha.top() << " removido" << endl;
+            cout << pilha.top() << endl;
             pilha.pop();
         }
         return;
@@ -31,14 +31,23 @@ public:
 
         stack<T> aux;
 
-        while (!pilha.empty())
-        {
-            cout << pilha.top() << endl;
-            aux.push(pilha.top());
-            pilha.pop();
+        if(pilha.empty()){
+            pilha.push(novo);
+        }else{
+
+          while (!pilha.empty())
+          {
+              aux.push(pilha.top());
+              pilha.pop();
+          }
+          aux.push(novo);
+
+          while (!aux.empty())
+          {
+              pilha.push(aux.top());
+              aux.pop();
+          }
         }
-        aux.push(novo);
-        pilha = aux;
     }
 };
 
@@ -48,17 +57,10 @@ int main()
 
     Stack<int> teste;
 
-    teste.push(1);
-    teste.push(2);
-    teste.push(3);
-    teste.push(4);
-    teste.push(5);
     teste.simulaFila(1);
-
-    while (!teste.empty())
-    {
-        cout << teste.top() << endl;
-        teste.pop();
-    }
+    teste.simulaFila(2);
+    teste.simulaFila(3);
+ 
+    teste.popTodos();
     return 0;
 }
