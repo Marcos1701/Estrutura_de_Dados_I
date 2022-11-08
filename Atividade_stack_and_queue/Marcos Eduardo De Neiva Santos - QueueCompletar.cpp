@@ -21,6 +21,7 @@ public:
 
         while (!fila.empty())
         {
+            cout << fila.front() << endl;
             fila.pop();
         }
     }
@@ -29,17 +30,22 @@ public:
     {
         queue<T> aux;
 
-        while (!fila.empty())
-        {
-            aux.push(fila.front());
-            fila.pop();
-        }
+        if(fila.empty()){
+            fila.push(novo);
+        }else{
 
-        fila.push(novo);
-        while (!aux.empty())
-        {
-            fila.push(aux.front());
-            aux.pop();
+          while (!fila.empty())
+          {
+              aux.push(fila.front());
+              fila.pop();
+          }
+
+          fila.push(novo);
+          while (!aux.empty())
+          {
+              fila.push(aux.front());
+              aux.pop();
+          }
         }
     }
 };
@@ -47,13 +53,9 @@ public:
 main()
 {
     Queue<int> fila;
-    fila.push(4);
-    fila.push(5);
+    fila.simulaPilha(4);
+    fila.simulaPilha(5);
     fila.simulaPilha(3);
 
-    while (!fila.empty())
-    {
-        cout << "=> " << fila.front() << endl;
-        fila.pop();
-    }
+    fila.popTodos();
 }
