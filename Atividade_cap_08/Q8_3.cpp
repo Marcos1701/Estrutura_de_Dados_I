@@ -4,26 +4,7 @@
 
 using namespace std;
 
-//void bubble_sort(double v[], int tam){
-//    int aux = tam;
-
-//    for(int i = 0; i < tam; i++){
-//       int cont = 0;
-//       for(int j = 0; j < aux; j++){
-//          if(v[j]>v[j+1]){
-//            double x = v[j];
-//            v[j] = v[j+1];
-//            v[j+1] = x;
-//            cont = 1;
-//          }
-//       }
-//       if(!cont){
-//          break;
-//       }
-//    }
-// }
-
-//ou..
+// Feito por: Marcos Eduardo de Neiva Santos
 
 #define troca(a, b) { int x = a; a = b; b = x;};
 void empurra (int v[], int n) {
@@ -33,11 +14,11 @@ void empurra (int v[], int n) {
 }
 
 void BubbleSort(int v[], int n){
-    int aux = n;
-    for (int i=0; i<n; i++){
-        empurra(v, aux);
-        aux--;
+    if(n == 0){
+       return;
     }
+    empurra(v, n);
+    BubbleSort(v, n - 1);
 }
 
 int main(){
