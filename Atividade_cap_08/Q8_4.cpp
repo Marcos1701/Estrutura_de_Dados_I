@@ -2,6 +2,8 @@
 //crie a função recursiva selectionSort (v,n), que ordena 
 //um vetor V com n números inteiros.
 
+// Feito por: Marcos Eduardo de Neiva Santos
+
 #include <iostream>
 
 using namespace std;
