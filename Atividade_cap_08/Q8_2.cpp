@@ -1,41 +1,51 @@
 #include <iostream>
+#include <string.h>
 using namespace std;
 
-// #define troca(a,b) { double x=a; a=b; b=x; }
-// void bubble_sort (double v[], int n) {
-//     for (int i=1; i<=n-1; i++)
-//        for (int j=0; j<n-i; j++)
-//           if( v[j]>v[j+1])
-//              troca(v[j],v[j+1]);
-// }
+void insere_cad_caracter(char x[], char v[][30], int n, int tam)
+{
+    char aux[10];
 
-void bubble_sort(double v[], int tam){
-   //int tam = sizeof(v)/sizeof(v[0]);
-   int aux = tam;
+    int j = n;
 
-   for(int i = 0; i < tam; i++){
-      int cont = 0;
-      for(int j = 0; j < aux; j++){
-         if(v[j]>v[j+1]){
-           double x = v[j];
-           v[j] = v[j+1];
-           v[j+1] = x;
-           cont = 1;
-         }
-      }
-      if(!cont){
-         break;
-      }
-   }
+    while (j < tam)
+    {
+        if (strcmp(x, v[j]) > 0)
+        {
+            strcpy(aux, x);
+            strcpy(v[n], v[j]);
+            strcpy(v[j], aux);
+        }
+        j++;
+    }
 }
 
+void insertion_sort_to_cad_caracter(char v[][30], int tam)
+{
+    for (int i = 0; i < tam; i++)
+        insere_cad_caracter(v[i], v, i, tam);
+}
 
-int main(){
-   double v[] = {5.2,6.1,7.2,1.2,2.11,9.47,3.22,4.11, 9.46};
+int main()
+{
+    int x;
+    cout << "Digite quantos nomes(ou palavras) serao inseridos: ";
+    cin >> x;
+    char s[x][30];
+    // char s[][10] = {"Alex", "Bernardo", "Wesley", "Vitoria", "Marcos", "Ze", "Carlos", "David"};
 
-   bubble_sort(v, 9);
+    for (int i = 0; i < x; i++)
+    {
+        cout << "Digite o nome/palavra: ";
+        cin >> s[i];
+    }
 
-   for(int i=0; i<9; i++){
-      cout << "=> " << v[i] << endl;
-   }
+    insertion_sort_to_cad_caracter(s, x);
+
+    cout << endl
+         << "Nomes ordenados: " << endl;
+    for (int i = 0; i < x; i++)
+    {
+        cout << i + 1 << " => " << s[i] << endl;
+    }
 }
