@@ -15,26 +15,26 @@ int seleciona (int v[], int n) {
    return i;
 }
 void selectionsort(int v[], int n) {
-   while( n>1){
-      troca(v[seleciona(v,n)],v[n-1]);
-      n--;
-   }
-}
-
-
-void selectionSort(int v[], int n) {
-    int aux = n;
-    for (int i=0; i<n; i++){
-        selectionsort(v, aux);
-        aux--;
+    if(n == 1){
+        return;
     }
+      troca(v[seleciona(v,n)],v[n-1]);
+      selectionsort(v, n - 1);
 }
+
+
+// void selectionSort(int v[], int n) {
+    
+//     if(n == 0) return;
+//     selectionsort(v, n);
+//     selectionSort(v, n - 1);
+// }
 
 int main(){
 
     int v[] = {2,4,1,6,5,10,9};
 
-    selectionSort(v, 7);
+    selectionsort(v, 7);
 
     for (int i=0; i<7; i++){
         cout << v[i] << endl;
