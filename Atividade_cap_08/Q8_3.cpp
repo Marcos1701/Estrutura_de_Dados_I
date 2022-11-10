@@ -1,67 +1,42 @@
+// Usando a função empurra (), 
+//que move o item máximo de um vetor 
+//para sua última
+// posição, crie a função recursiva bubbleSort (v,n),
+// que ordena um vetor V com n
+// números inteiros.
+// void empurra (int v[], int n) {
+//    for (int i=0; i<n; i++)
+//       if( v[i]>v[i+1])
+//           troca (v[i],v[i+11]);
+// }
+
 #include <iostream>
-#include <string.h>
+
 using namespace std;
 
-void insere(int x, int v[], int n)
-{
-    while (n > 0 && x < v[n - 1])
-    {
-        v[n] = v[n - 1];
-        n--;
-    }
-    v[n] = x;
+#define troca(a, b) { int x = a; a = b; b = x;};
+void empurra (int v[], int n) {
+   for (int i = 0; i<n; i++)
+      if( v[i] > v[i+1])
+          troca(v[i],v[i+1]);
 }
 
-void insertion_sort(int v[], int n)
-{
-    for (int i = 0; i < n; i++)
-        insere(v[i], v, i);
-}
-
-void insere_cad_caracter(char x[], char v[][30], int n, int tam)
-{
-    char aux[10];
-
-    int j = n;
-
-    while (j < tam)
-    {
-        if (strcmp(x, v[j]) > 0)
-        {
-            strcpy(aux, x);
-            strcpy(v[n], v[j]);
-            strcpy(v[j], aux);
-        }
-        j++;
+void BubbleSort(int v[], int n){
+    int aux = n;
+    for (int i=0; i<n; i++){
+        empurra(v, aux);
+        aux--;
     }
 }
 
-void insertion_sort_to_cad_caracter(char v[][30], int n, int tam)
-{
-    for (int i = 0; i < n; i++)
-        insere_cad_caracter(v[i], v, i, tam);
-}
+int main(){
 
-int main()
-{
-    int x;
-    cout << "Digite quantos nomes(ou palavras) serao inseridos: ";
-    cin >> x;
-    char s[x][30];
-    // char s[][10] = {"Alex", "Bernardo", "Wesley", "Vitoria", "Marcos", "Ze", "Carlos", "David"};
+    int v[] = {2,4,1,6,5,10,9};
 
-    for (int i = 0; i < x; i++)
-    {
-        cout << "Digite o nome/palavra: ";
-        cin >> s[i];
+    BubbleSort(v, 7);
+
+    for (int i=0; i<7; i++){
+        cout << v[i] << endl;
     }
-
-    insertion_sort_to_cad_caracter(s, 8, 8);
-
-    cout << endl
-         << "Nomes ordenados: " << endl;
-    for (int i = 0; i < 8; i++)
-    {
-        cout << "=> " << s[i] << endl;
-    }
+    return 0;
 }
