@@ -12,6 +12,7 @@ int main()
     int v1[] = {72, 69, 51, 46, 33, 28, 15};
     int v2[] = {48, 28, 51, 33, 72, 15, 69};
     int pior_caso[] = {2, 5, 4, 13, 9, 10, 8};
+    int melhor_caso[] = {12, 10, 8, 6, 4, 2, 1};
 
     Quick(v1, 0, 6);
 
@@ -32,6 +33,13 @@ int main()
     cout << "\n----- Vetor pior caso ordenado -----" << endl;
     for (int i = 0; i < 7; i++)
         cout << "=> " << pior_caso[i] << endl;
+    cout << "Qtd operacoes realizadas: " << qtd_operacoes << endl;
+
+    qtd_operacoes = 0;
+    Quick(melhor_caso, 0, 6);
+    cout << "\n----- Vetor melhor caso ordenado -----" << endl;
+    for (int i = 0; i < 7; i++)
+        cout << "=> " << melhor_caso[i] << endl;
     cout << "Qtd operacoes realizadas: " << qtd_operacoes << endl;
 }
 
@@ -70,6 +78,7 @@ void Quick(int vetor[10], int inicio, int fim)
     if (ini < fim)
         Quick(vetor, ini, fim);
 }
+
 
 
 // Saida resultante:
