@@ -1,13 +1,13 @@
 ## ---> Como ocorre o Quick Sort <---
 
 *R- Primeiramente o algoritmo realiza uma busca pelo pivô, onde o inicio da partição enviada (inicialmente é enviado o vetor inteiro),                                   
-R- que é armazenado em uma variavel 'x', inicialmente ela é comparada com o valor que está no final da partição, enquanto ele for 
-R- menor que v[ f ], o valor de 'f'(inicialmente é o indice do ultimo elemento da partição) é decrementado e ocorre uma nova comparação 
-R- com o valor em v[ f ], em seguida ocorre uma comparação com o valor que está no inicio da partição, seu indice é marcado pela variável
-R- 'i', e enquanto o valor de v[ i ] for menor que o de x, o valor de 'i' é decrementado, em seguida, caso o valor de 'f' seja maior que
-R- o de 'i', ocorre uma troca entre v[i] e v[p], na primeira metade do algoritmo, o valor de resultante de 'f' é reutilizado como parâmetro
-R- para uma nova chamada da função (caso ela seja recursiva) onde o valor de 'i' continua sendo o indice do primeiro elemento do vetor
-R- original, na segunda metade o valor de 'f' enviado é o indice do fim do vetor original e o valor de 'i' é equivalente ao valor
+R- que é armazenado em uma variavel 'x', inicialmente ela é comparada com o valor que está no final da partição, enquanto ele for                                       
+R- menor que v[ f ], o valor de 'f'(inicialmente é o indice do ultimo elemento da partição) é decrementado e ocorre uma nova comparação                                 
+R- com o valor em v[ f ], em seguida ocorre uma comparação com o valor que está no inicio da partição, seu indice é marcado pela variável                            
+R- 'i', e enquanto o valor de v[ i ] for menor que o de x, o valor de 'i' é decrementado, em seguida, caso o valor de 'f' seja maior que                                
+R- o de 'i', ocorre uma troca entre v[i] e v[p], na primeira metade do algoritmo, o valor de resultante de 'f' é reutilizado como parâmetro                               
+R- para uma nova chamada da função (caso ela seja recursiva) onde o valor de 'i' continua sendo o indice do primeiro elemento do vetor                               
+R- original, na segunda metade o valor de 'f' enviado é o indice do fim do vetor original e o valor de 'i' é equivalente ao valor                                    
 R- de 'f' + 1 resultante da ultima chamada da função.*                                                                                                                                            
 
 **1) a execução está no arquivo 'Q8_8.cpp'**                                                                                                         
