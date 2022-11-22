@@ -2,6 +2,8 @@
 
 using namespace std;
 
+// Esse algoritm foi utilizado apenas como um teste..
+
 void Quick(int vetor[10], int inicio, int fim);
 
 int qtd_operacoes = 0;
@@ -11,8 +13,8 @@ int main()
 
     int v1[] = {72, 69, 51, 46, 33, 28, 15};
     int v2[] = {48, 28, 51, 33, 72, 15, 69};
-    int pior_caso[] = {2, 5, 4, 13, 9, 10, 8};
-    int melhor_caso[] = {12, 10, 8, 6, 4, 2, 1};
+    int melhor_caso[] = {2, 5, 4, 13, 9, 10, 8};
+    int pior_caso[] = {12, 10, 8, 6, 4, 2, 1};
 
     Quick(v1, 0, 6);
 
@@ -45,6 +47,7 @@ int main()
 
 void Quick(int vetor[10], int inicio, int fim)
 {
+            qtd_operacoes += 4;
     int ini = inicio;
     int f = fim;
     int x = vetor[(inicio + fim) / 2];
@@ -52,6 +55,7 @@ void Quick(int vetor[10], int inicio, int fim)
 
     while (ini <= f)
     {
+        qtd_operacoes++;
         while (vetor[ini] < x && ini < fim)
         {
             ini++;
