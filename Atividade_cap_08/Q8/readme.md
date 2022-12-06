@@ -1,3 +1,4 @@
+- Feito por: Marcos Eduardo de Neiva Santos
 ## ---> Como ocorre o Quick Sort <---
 
 *R- Primeiramente o algoritmo realiza uma busca pelo pivô, onde o inicio da partição enviada (inicialmente é enviado o vetor inteiro),                                   
